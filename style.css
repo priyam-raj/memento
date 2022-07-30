@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css?family=Dekko|Lato:900|Rock+Salt");
+
+
+* {
+    margin: 0;
+    padding: 0;
+    color: #000;
+  }
+
+body {
+    background-color: #ffffff;
+    font-family: "Lato", sans-serif;
+    display: grid;
+    place-items: center;
+    background-size: 10px, 100%;
+}
+
+.comicText {
+    font-family: "Dekko", cursive;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+    padding: 0.2rem 1.25rem;
+}
+
+
+#tagText {
+    color: #fff;
+}
+
+.spider-tag {
+  padding: 1rem 7.5rem 11rem;
+  border-radius: 30px;
+  font-size: 2rem;
+  color: #fff;
+  background: #DF1F2D;
+  text-align: center;
+  font-family: "Lato", sans-serif;
+  box-shadow: 0 1px 15px -7.5px #000000;
+  position: relative;
+  line-height: normal;
+}
+.spider-tag strong {
+  text-transform: uppercase;
+  font-size: 3.5rem;
+}
+/* with the :before pseudo element include a solid white background */
+.spider-tag:before {
+  content: "";
+  position: absolute;
+  top: 9rem;
+  left: 2%;
+  width: 96%;
+  height: 9rem;
+  background: #fff;
+  /* border-radius mathing the .spider-tag container */
+  border-radius: 0 0 30px 30px;
+}
+/* with the :after pseudo element add the name of the character */
+.spider-tag:after {
+  content: "Priyam Raj";
+  position: absolute;
+  top: 11.25rem;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-family: "Rock Salt", cursive;
+  font-size: 2rem;
+  letter-spacing: 0.25rem;
+  font-weight: 300;
+  font-weight: bold;
+  color: #000;
+}
+
