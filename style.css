@@ -16,7 +16,7 @@ body {
 }
 
 
-p {
+.paragraph {
   font-family: "Dekko";
 max-width: 500px;
 }
@@ -149,7 +149,7 @@ max-width: 500px;
   top: 9rem;
   left: 2%;
   width: 96%;
-  height: 9rem;
+  height: 9.5rem;
   background: #fff;
   /* border-radius mathing the .spider-tag container */
   border-radius: 0 0 30px 30px;
