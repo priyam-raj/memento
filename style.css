@@ -17,7 +17,7 @@ body {
 
 
 .paragraph {
-  font-family: "Dekko";
+font-family: "Dekko";
 max-width: 500px;
 }
 
@@ -63,7 +63,7 @@ max-width: 500px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 20px;
+  font-size: 15px;
   padding-top: 10px;
   position: relative;
 }
@@ -113,12 +113,9 @@ max-width: 500px;
 .comicText {
   font-family: "Dekko", cursive;
   font-size: 1.2rem;
-  text-transform: uppercase;
   margin: 0 auto;
-  text-align: center;
   width: 100%;
   max-width: 500px;
-  padding: 0.2rem 1.25rem;
 }
 
 #tagText {
