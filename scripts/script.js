@@ -11,7 +11,7 @@ polaroids.forEach(item => {
 
 // Function to calculate days since the user was born
 function calculateDays() {
-  const birthday = new Date('03/23/2002');
+  const birthday = new Date('03/23/2001');
   const today = new Date();
   const days = Math.floor((today - birthday) / (1000 * 60 * 60 * 24));
   document.querySelector('#days').innerHTML = days;
