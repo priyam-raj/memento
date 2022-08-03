@@ -6,6 +6,15 @@
   color: #000;
 }
 
+.archives {
+  max-width: 1080px;
+}
+
+.logo {
+  max-width: 46px;
+}
+
+
 body {
   background-color: #f5eddc;
   display: grid;
