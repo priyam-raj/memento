@@ -22,12 +22,9 @@ body {
   background-size: 10px, 100%;
   font-family: "Dekko";
   width:100%; 
-  overflow:hidden;
 }
 
-html {
-  width:100%; overflow:hidden;
-}
+
 
 
 .paragraph {
