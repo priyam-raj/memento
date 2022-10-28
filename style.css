@@ -27,6 +27,7 @@ body {
 
 
 
+
 .paragraph {
 font-family: "Dekko";
 max-width: 500px;
@@ -85,9 +86,10 @@ font-size: 18px
 }
 
 .bubble {
+  margin: auto;
   max-width: 500px;
-  margin: 2rem 0;
   padding: 0.2rem 1.25rem;
+  margin-bottom: 2rem;
   text-align: center;
   font-family: "Dekko", cursive;
   text-transform: uppercase;
