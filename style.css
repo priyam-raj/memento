@@ -3,6 +3,10 @@
 * {
   margin: 0;
   padding: 0;
+  color: rgb(235, 235, 235);
+}
+
+.bubble-text {
   color: #000;
 }
 
@@ -16,7 +20,7 @@
 
 
 body {
-  background-color: #f5eddc;
+  background-color: #0e0e0e;
   display: grid;
   place-items: center;
   background-size: 10px, 100%;
@@ -29,7 +33,7 @@ body {
 
 
 .paragraph {
-font-family: "Dekko";
+/* font-family: "Dekko"; */
 max-width: 500px;
 font-size: 18px
 }
@@ -46,11 +50,27 @@ font-size: 18px
   flex-wrap: wrap;
 }
 
+
+.polaroid__content-caption {
+  font-family: "Permanent Marker";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  padding-top: 10px;
+  position: relative;
+  color: #000;
+}
+
+.text-center {
+  color: #000;
+}
+
 .polaroid {
   margin: 30px;
   width: 400px;
   height: 450px;
-  background-color: white;
+  background-color: #fff;
   padding: 1rem;
   box-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.2);
   filter: grayscale(100%);
@@ -75,15 +95,7 @@ font-size: 18px
 
 
 
-.polaroid__content-caption {
-  font-family: "Permanent Marker";
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
-  padding-top: 10px;
-  position: relative;
-}
+
 
 .bubble {
   margin: auto;
@@ -99,7 +111,7 @@ font-size: 18px
     #fff;
   background-size: 12px, 100%;
   /* solid border */
-  border: 0.4rem solid #363636;
+  border: 0.4rem solid #ffffff;
   /* position relative for the :before pseudo element */
   position: relative;
 }
