@@ -1,13 +1,53 @@
 @import url("https://fonts.googleapis.com/css?family=Dekko|Lato|Rock+Salt|Permanent+Marker");
 
+/* ===== CSS CUSTOM PROPERTIES (DESIGN TOKENS) ===== */
+:root {
+  /* Bubble System Variables */
+  --bubble-bg-color: #ffffff;
+  --bubble-border-color: #ffffff;
+  --bubble-border-width: 0.4rem;
+  --bubble-font-family: "Dekko", cursive;
+  --bubble-font-size: 2rem;
+  --bubble-letter-spacing: 0.2rem;
+  --bubble-max-width: 500px;
+  --bubble-padding: 0.2rem 1.25rem;
+  --bubble-margin-bottom: 2rem;
+  
+  /* SVG Pattern Variables */
+  --bubble-pattern-light: url('data:image/svg+xml;utf8,<svg width="100" height="100" transform="rotate(25)" opacity="0.3" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g fill="%23250E17"><circle cx="25" cy="25" r="12.5"/><circle cx="75" cy="75" r="12.5"/><circle cx="75" cy="25" r="12.5"/><circle cx="25" cy="75" r="12.5"/></g></svg>');
+  --bubble-pattern-dark: url('data:image/svg+xml;utf8,<svg width="100" height="100" transform="rotate(35)" opacity="1" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g fill="%23250E17"><circle cx="25" cy="25" r="12.5"/><circle cx="75" cy="75" r="12.5"/><circle cx="75" cy="25" r="12.5"/><circle cx="25" cy="75" r="12.5"/></g></svg>');
+  --bubble-pattern-highlight: url('data:image/svg+xml;utf8,<svg width="100" height="100" transform="rotate(25)" opacity="0.8" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g fill="%23d68810"><circle cx="25" cy="25" r="12.5"/><circle cx="75" cy="75" r="12.5"/><circle cx="75" cy="25" r="12.5"/><circle cx="25" cy="75" r="12.5"/></g></svg>');
+  
+  /* Animation Variables */
+  --bubble-appear-duration: 0.8s;
+  --bubble-glitch-duration: 3s;
+  --bubble-animation-delay: 1s;
+  
+  /* Shadow Variables */
+  --bubble-shadow-offset-x: -0.6rem;
+  --bubble-shadow-offset-y: 0.15rem;
+  --bubble-shadow-color: #000000;
+  --bubble-shadow-z-index: -5;
+  
+  /* Global Colors */
+  --text-color-light: rgb(235, 235, 235);
+  --text-color-dark: #000000;
+  --bg-color-dark: #0e0e0e;
+}
+
 * {
   margin: 0;
   padding: 0;
-  color: rgb(235, 235, 235);
+  color: var(--text-color-light);
 }
 
 .bubble-text {
-  color: #000;
+  color: var(--text-color-dark);
+}
+
+.container {
+  perspective: 1000px;
+  transform-style: preserve-3d;
 }
 
 .archives {
@@ -19,12 +59,13 @@
 }
 
 body {
-  background-color: #0e0e0e;
-  display: grid;
-  place-items: center;
-  background-size: 10px, 100%;
+  background: #000000;
   font-family: "Dekko";
   width: 100%;
+  margin: 0;
+  padding: 0;
+  color: #ffffff;
+  min-height: 100vh;
 }
 
 .paragraph {
@@ -83,47 +124,136 @@ body {
   object-fit: cover;
 }
 
-.bubble {
-  margin: auto;
-  max-width: 500px;
-  padding: 0.2rem 1.25rem;
-  margin-bottom: 2rem;
-  text-align: center;
+
+/* ===== CLOSING LINKS ===== */
+
+.closing-links {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.closing-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.2rem 2rem;
+  background: #000000;
+  border: 3px solid #ffffff;
+  border-radius: 8px;
+  color: #ffffff;
+  text-decoration: none;
   font-family: "Dekko", cursive;
-  text-transform: uppercase;
-  font-size: 2rem;
-  letter-spacing: 0.2rem;
-  background: url('data:image/svg+xml;utf8,<svg width="100" height="100" transform="rotate(25)" opacity="0.3" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g  fill="%23250E17"><circle cx="25" cy="25" r="12.5"/><circle cx="75" cy="75" r="12.5"/><circle cx="75" cy="25" r="12.5"/><circle cx="25" cy="75" r="12.5"/></g></svg>'),
-    #fff;
-  background-size: 12px, 100%;
-  /* solid border */
-  border: 0.4rem solid #ffffff;
-  /* position relative for the :before pseudo element */
+  transition: all 0.3s ease;
+  box-shadow: 5px 5px 0px #ffffff;
   position: relative;
+  transform: translateZ(0);
 }
 
-/* for the highlight container change the solid backgorund to a yellow-ish hue */
-.bubble--highlight {
-  background: url('data:image/svg+xml;utf8,<svg width="100" height="100" transform="rotate(25)" opacity="0.8" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g  fill="%23d68810"><circle cx="25" cy="25" r="12.5"/><circle cx="75" cy="75" r="12.5"/><circle cx="75" cy="25" r="12.5"/><circle cx="25" cy="75" r="12.5"/></g></svg>'),
-    #ffcd28;
-  background-size: 13px, 100%;
-  font-weight: 700;
+.closing-link:hover {
+  background: #ffffff;
+  color: #000000;
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0px #ffffff;
 }
 
-/* for every .bubble container add a solid background behind the container itself, slightly offset */
-.bubble:before {
-  content: "";
-  position: absolute;
-  left: -0.6rem;
-  top: 0.15rem;
-  width: 100%;
-  height: 100%;
-  /* with the same texture, but different color, for both the texture and the background */
-  background: url('data:image/svg+xml;utf8,<svg width="100" height="100" transform="rotate(35)" opacity="1" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g fill="%23250E17"><circle cx="25" cy="25" r="12.5"/><circle cx="75" cy="75" r="12.5"/><circle cx="75" cy="25" r="12.5"/><circle cx="25" cy="75" r="12.5"/></g></svg>'),
-    #000;
-  background-size: 12px, 100%;
-  border: 0.4rem solid #000;
-  z-index: -5;
+.closing-link:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #000000;
+}
+
+.link-title {
+  font-size: 1.1rem;
+  font-weight: normal;
+  line-height: 1.2;
+  text-transform: lowercase;
+  letter-spacing: 0.2px;
+}
+
+.link-subtitle {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin-top: 0.2rem;
+  font-style: italic;
+}
+
+/* ===== BACK TO MAIN ===== */
+
+.back-to-main {
+  text-align: center;
+  margin: 2rem 0 2rem 0;
+}
+
+.back-link {
+  color: var(--text-color-light);
+  text-decoration: none;
+  font-family: "Dekko", cursive;
+  font-size: 1rem;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+  text-transform: lowercase;
+}
+
+.back-link:hover {
+  opacity: 1;
+}
+
+/* ===== STORY CONTAINER ===== */
+
+.story-container--hidden {
+  opacity: 0;
+}
+
+/* ===== COZY COMIC BOOK TITLE SYSTEM ===== */
+
+/* Simple comic book title - cozy and friendly */
+.comic-title {
+  /* Core Layout */
+  display: inline-block;
+  margin: 2rem auto;
+  padding: 1rem 2.5rem;
+  position: relative;
+  
+  /* Typography */
+  font-family: "Dekko", cursive;
+  font-size: 2rem;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  color: #000;
+  text-align: center;
+  
+  /* Classic comic book background with halftone dots */
+  background: 
+    radial-gradient(circle, #000 1px, transparent 1px),
+    #ffffff;
+  background-size: 8px 8px;
+  background-position: 0 0, 4px 4px;
+  
+  /* Comic book border */
+  border: 3px solid #000;
+  border-radius: 8px;
+  
+  /* Simple shadow for depth */
+  box-shadow: 4px 4px 0px #000;
+  
+  /* Gentle hover effect */
+  transition: transform 0.2s ease;
+}
+
+.comic-title:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #000;
+}
+
+/* Chapter variant - no crazy animations, just a subtle effect */
+.comic-title--chapter {
+  background: 
+    radial-gradient(circle, #333 1px, transparent 1px),
+    #f9f9f9;
+  background-size: 6px 6px;
 }
 
 .comicText {
@@ -150,6 +280,8 @@ body {
   box-shadow: 0 1px 15px -7.5px #000000;
   position: relative;
   line-height: normal;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
 }
 .spider-tag strong {
   text-transform: uppercase;
@@ -185,6 +317,1252 @@ body {
 
 .striked {
   text-decoration: line-through;
+}
+
+/* Intro Button Styles */
+.intro-button-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  transition: opacity 0.5s ease;
+}
+
+.intro-button {
+  background: #000;
+  border: 3px solid #fff;
+  color: #fff;
+  padding: 20px 40px;
+  font-family: "Lato", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
+}
+
+.intro-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+}
+
+.intro-button:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.intro-button:hover:before {
+  left: 100%;
+}
+
+/* Intro Overlay */
+.intro-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+/* Spider-Verse Animation Classes */
+.glitch-effect {
+  animation: glitch 0.3s ease-in-out infinite;
+}
+
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+    filter: hue-rotate(0deg);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+    filter: hue-rotate(90deg);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+    filter: hue-rotate(180deg);
+  }
+  60% {
+    transform: translate(2px, 2px);
+    filter: hue-rotate(270deg);
+  }
+  80% {
+    transform: translate(2px, -2px);
+    filter: hue-rotate(360deg);
+  }
+  100% {
+    transform: translate(0);
+    filter: hue-rotate(0deg);
+  }
+}
+
+.multiverse-split {
+  animation: multiverse 1s ease-out forwards;
+}
+
+@keyframes multiverse {
+  0% {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5) rotate(180deg);
+    opacity: 0.5;
+    filter: blur(2px);
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+.portal-effect {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, #eb1d36, #000);
+  z-index: 998;
+  opacity: 0;
+}
+
+.portal-expand {
+  animation: portalExpand 2s ease-out forwards;
+}
+
+@keyframes portalExpand {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  50% {
+    width: 200vw;
+    height: 200vw;
+    opacity: 0.8;
+  }
+  100% {
+    width: 300vw;
+    height: 300vw;
+    opacity: 0;
+  }
+}
+
+.dimension-shift {
+  animation: dimensionShift 1.5s ease-out forwards;
+}
+
+@keyframes dimensionShift {
+  0% {
+    transform: perspective(1000px) rotateY(0) translateZ(0);
+    opacity: 0;
+  }
+  50% {
+    transform: perspective(1000px) rotateY(180deg) translateZ(200px);
+    opacity: 0.5;
+  }
+  100% {
+    transform: perspective(1000px) rotateY(360deg) translateZ(0);
+    opacity: 1;
+  }
+}
+
+.web-lines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 997;
+  opacity: 0;
+}
+
+.web-lines::before,
+.web-lines::after {
+  content: "";
+  position: absolute;
+  background: linear-gradient(45deg, transparent 48%, #fff 49%, #fff 51%, transparent 52%);
+  background-size: 50px 50px;
+  animation: webMove 3s linear infinite;
+}
+
+.web-lines::before {
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+}
+
+.web-lines::after {
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background: linear-gradient(-45deg, transparent 48%, #fff 49%, #fff 51%, transparent 52%);
+  background-size: 50px 50px;
+  animation-direction: reverse;
+}
+
+/* Comic book dots overlay */
+.comic-dots {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle, #eb1d36 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0;
+  z-index: 996;
+  pointer-events: none;
+  animation: comicFade 0.5s ease-out forwards;
+}
+
+@keyframes comicFade {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Speed lines effect */
+.speed-lines {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse at center, transparent 0%, transparent 40%, rgba(255,255,255,0.1) 40%, transparent 42%);
+  background-size: 100% 100%;
+  z-index: 995;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.speed-burst {
+  animation: speedBurst 0.8s ease-out forwards;
+}
+
+@keyframes speedBurst {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+  }
+}
+
+@keyframes webMove {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(50px, 50px);
+  }
+}
+
+.fade-in-sequence {
+  animation: fadeInSequence 1s ease-out forwards;
+}
+
+@keyframes fadeInSequence {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Professional Landing Page Styles */
+.main-content {
+  max-width: 900px;
+  margin: 0;
+  padding: 3rem;
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes screenShake {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-2px, 2px);
+  }
+  20% {
+    transform: translate(2px, -2px);
+  }
+  30% {
+    transform: translate(-2px, -2px);
+  }
+  40% {
+    transform: translate(2px, 2px);
+  }
+  50% {
+    transform: translate(-1px, 1px);
+  }
+  60% {
+    transform: translate(1px, -1px);
+  }
+  70% {
+    transform: translate(-1px, -1px);
+  }
+  80% {
+    transform: translate(1px, 1px);
+  }
+  90% {
+    transform: translate(0, -1px);
+  }
+}
+
+.header-section {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.intro-lines {
+  margin-bottom: 2rem;
+}
+
+
+.intro-lines p {
+  font-size: 1.5rem;
+  line-height: 1.7;
+  margin-bottom: 0.8rem;
+  color: #ffffff;
+  font-family: Helvetica, Arial, sans-serif;
+  text-align: left;
+}
+
+.name-with-photo {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.profile-photo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.profile-photo:hover {
+  transform: scale(1.05);
+}
+
+.name-intro {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.intro-lines a {
+  color: #4A90E2;
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid transparent;
+  transition: border-bottom 0.2s ease;
+}
+
+.intro-lines a:hover {
+  border-bottom: 1px solid #4A90E2;
+}
+
+.contact-section {
+  text-align: left;
+  margin-bottom: 2rem;
+  padding-top: 2rem;
+}
+
+.contact-section h2 {
+  font-size: 1.6rem;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #ffffff;
+  margin-bottom: 1.2rem;
+  font-weight: 600;
+}
+
+.contact-lines p {
+  font-size: 1.3rem;
+  line-height: 1.7;
+  margin-bottom: 0.7rem;
+  color: #ffffff;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.contact-lines a {
+  color: #4A90E2;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-bottom 0.2s ease;
+}
+
+.contact-lines a:hover {
+  border-bottom: 1px solid #4A90E2;
+}
+
+/* Easter Egg Trigger */
+.easter-egg-trigger {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, #eb1d36 30%, transparent 30%);
+  background-size: 10px 10px;
+  opacity: 0.1;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  transform: scale(1);
+}
+
+.easter-egg-trigger:hover {
+  opacity: 0.3;
+}
+
+/* Story Sequence Styles */
+.story-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+
+.story-container {
+  transition: opacity 1s ease;
+}
+
+/* Hero Introduction */
+.hero-intro {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.spider-tag-large {
+  padding: 1rem 7.5rem 11rem;
+  border-radius: 30px;
+  font-size: 2rem;
+  color: #fff;
+  background: #eb1d36;
+  text-align: center;
+  font-family: "Lato", sans-serif;
+  font-weight: 900;
+  box-shadow: 0 1px 15px -7.5px #000000;
+  position: relative;
+  line-height: normal;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  animation: heroAppear 2s ease-out forwards;
+}
+
+@keyframes heroAppear {
+  0% {
+    transform: scale(0.3) rotateY(360deg);
+    opacity: 0;
+    filter: hue-rotate(180deg) blur(5px);
+  }
+  30% {
+    transform: scale(0.8) rotateY(180deg);
+    opacity: 0.5;
+    filter: hue-rotate(90deg) blur(2px);
+  }
+  60% {
+    transform: scale(1.2) rotateY(0deg);
+    opacity: 0.8;
+    filter: hue-rotate(45deg) blur(1px);
+  }
+  80% {
+    transform: scale(0.9) rotateY(-10deg);
+    opacity: 0.9;
+    filter: hue-rotate(0deg) blur(0px);
+  }
+  100% {
+    transform: scale(1) rotateY(0deg);
+    opacity: 1;
+    filter: hue-rotate(0deg) blur(0px);
+  }
+}
+
+.spider-tag-large.loaded {
+  animation: glitchLoop 4s ease-in-out infinite;
+}
+
+@keyframes glitchLoop {
+  0%, 90%, 100% {
+    transform: scale(1) rotateY(0deg);
+    filter: hue-rotate(0deg) blur(0px);
+  }
+  93% {
+    transform: scale(1.01) rotateY(0.5deg);
+    filter: hue-rotate(15deg) blur(0.2px);
+  }
+  96% {
+    transform: scale(0.99) rotateY(-0.5deg);
+    filter: hue-rotate(-15deg) blur(0.2px);
+  }
+}
+
+.spider-tag-large strong {
+  text-transform: uppercase;
+  font-size: 3.5rem;
+}
+
+.spider-tag-large:before {
+  content: "";
+  position: absolute;
+  top: 9rem;
+  left: 2%;
+  width: 96%;
+  height: 9.5rem;
+  background: #fff;
+  border-radius: 0 0 30px 30px;
+}
+
+.spider-tag-large:after {
+  content: "Priyam Raj";
+  position: absolute;
+  top: 11.25rem;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-family: "Rock Salt", cursive;
+  font-size: 2rem;
+  letter-spacing: 0.25rem;
+  font-weight: bold;
+  color: #000;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  text-align: center;
+  animation: bounce 2s infinite;
+}
+
+.scroll-arrow {
+  font-size: 2rem;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Story Chapters */
+.story-chapter {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  opacity: 1; /* Start visible for testing */
+  transform: translateY(0); /* Start in final position for testing */
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.story-chapter.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.chapter-content {
+  max-width: 800px;
+  text-align: center;
+}
+
+/* Legacy chapter-bubble class - redirects to new system */
+.chapter-bubble {
+  /* This class is deprecated - use .bubble.bubble--chapter instead */
+  /* Keeping for backwards compatibility during transition */
+}
+
+@keyframes bubbleAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes chapterGlitch {
+  0%, 90%, 100% {
+    transform: scale(1) translateY(0);
+    filter: hue-rotate(0deg);
+  }
+  93% {
+    transform: scale(1.01) translateY(-1px);
+    filter: hue-rotate(10deg);
+  }
+  96% {
+    transform: scale(0.99) translateY(1px);
+    filter: hue-rotate(-10deg);
+  }
+}
+
+.story-text {
+  font-size: 1.2rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  text-align: left;
+  max-width: 600px;
+  margin-left: 0;
+  margin-right: auto;
+  opacity: 0.95;
+  font-family: "Lato", sans-serif;
+  text-transform: none;
+}
+
+.birth-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.birth-polaroid {
+  width: 250px;
+  height: 300px;
+  background-color: #fff;
+  padding: 1rem;
+  box-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.2);
+  filter: grayscale(60%);
+  transform: rotate(-2deg);
+  transition: all 0.3s ease;
+}
+
+.birth-polaroid:hover {
+  filter: grayscale(0%);
+  transform: rotate(0deg) scale(1.05);
+}
+
+.birth-polaroid-image {
+  height: 200px;
+  width: 100%;
+  overflow: hidden;
+  padding-bottom: 5px;
+}
+
+.birth-polaroid-image img {
+  height: 100%;
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.birth-polaroid-caption {
+  font-family: "Permanent Marker";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  padding-top: 10px;
+  color: #000;
+  text-align: center;
+}
+
+.birth-dates {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.earth-icon {
+  font-size: 4rem;
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.birth-date {
+  font-size: 2rem;
+  font-family: "Rock Salt", cursive;
+  padding: 1rem 2rem;
+  border: 2px solid #eb1d36;
+  border-radius: 20px;
+  background: rgba(235, 29, 54, 0.1);
+  color: #fff;
+}
+
+/* Story Polaroids */
+.story-polaroids {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 3rem;
+  flex-wrap: wrap;
+}
+
+.story-polaroid {
+  width: 300px;
+  height: 350px;
+  background-color: #fff;
+  padding: 1rem;
+  box-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.2);
+  filter: grayscale(80%);
+  transition: all 0.3s ease;
+  transform: rotate(var(--rotation, 0deg));
+  animation: polaroidAppear 0.8s ease-out forwards;
+  opacity: 1;
+  position: relative;
+  overflow: visible; /* Allow tape to extend beyond polaroid */
+}
+
+/* Multiverse glitch effect for polaroids with alternate images */
+.story-polaroid.has-glitch {
+  animation: polaroidAppear 0.8s ease-out forwards;
+  /* Removed the persistent multiverseGlitch animation */
+}
+
+.story-polaroid.has-glitch .story-polaroid-image {
+  position: relative;
+}
+
+.story-polaroid.has-glitch .story-polaroid-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  z-index: 1;
+  transition: opacity 0.1s ease;
+}
+
+/* Infant glitch image */
+.story-polaroid.infant-glitch .story-polaroid-image::before {
+  background-image: url('glitch-media/infant-alt.jpg');
+}
+
+@keyframes multiverseGlitch {
+  0%, 5%, 10%, 15%, 20%, 25%, 30%, 35%, 40%, 45%, 50%, 55%, 60%, 65%, 70%, 75%, 80%, 85%, 90%, 95% {
+    filter: grayscale(80%);
+  }
+  6%, 11%, 16%, 21%, 26%, 31%, 36%, 41%, 46%, 51%, 56%, 61%, 66%, 71%, 76%, 81%, 86%, 91%, 96% {
+    filter: grayscale(80%) hue-rotate(180deg) contrast(150%) brightness(0.8);
+  }
+  7%, 12%, 17%, 22%, 27%, 32%, 37%, 42%, 47%, 52%, 57%, 62%, 67%, 72%, 77%, 82%, 87%, 92%, 97% {
+    filter: grayscale(80%) saturate(200%) contrast(120%);
+  }
+}
+
+/* Glitch overlay effect */
+@keyframes glitchOverlay {
+  0%, 90% {
+    opacity: 0;
+  }
+  5%, 15% {
+    opacity: 1;
+    transform: translateX(2px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateX(-2px);
+  }
+}
+
+/* Base duct tape styling - more transparent and realistic */
+.story-polaroid::before,
+.story-polaroid::after {
+  content: '';
+  position: absolute;
+  background: linear-gradient(135deg, rgba(196, 196, 196, 0.7) 0%, rgba(168, 168, 168, 0.8) 50%, rgba(154, 154, 154, 0.9) 100%);
+  border: 1px solid rgba(136, 136, 136, 0.6);
+  border-radius: 2px;
+  box-shadow: 
+    inset 0 1px 0 rgba(255,255,255,0.4),
+    0 3px 6px rgba(0,0,0,0.2);
+  z-index: 10;
+  opacity: 0.85;
+}
+
+/* Random tape patterns for each polaroid */
+
+/* First polaroid - corner taping extending beyond edges */
+.story-polaroid:nth-child(1)::before {
+  top: -15px;
+  right: 10px;
+  width: 80px;
+  height: 30px;
+  transform: rotate(18deg);
+}
+.story-polaroid:nth-child(1)::after {
+  bottom: -12px;
+  left: 5px;
+  width: 65px;
+  height: 25px;
+  transform: rotate(-15deg);
+}
+
+/* Second polaroid - side taping extending beyond edges */
+.story-polaroid:nth-child(2)::before {
+  top: 25px;
+  left: -18px;
+  width: 35px;
+  height: 90px;
+  transform: rotate(-5deg);
+}
+.story-polaroid:nth-child(2)::after {
+  top: 35px;
+  right: -15px;
+  width: 30px;
+  height: 80px;
+  transform: rotate(8deg);
+}
+
+/* Third polaroid - top and bottom center */
+.story-polaroid:nth-child(3)::before {
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-8deg);
+  width: 80px;
+  height: 30px;
+}
+.story-polaroid:nth-child(3)::after {
+  bottom: -10px;
+  right: 30px;
+  width: 60px;
+  height: 25px;
+  transform: rotate(22deg);
+}
+
+/* Fourth polaroid - diagonal corner */
+.story-polaroid:nth-child(4)::before {
+  top: -5px;
+  left: -5px;
+  width: 45px;
+  height: 45px;
+  transform: rotate(45deg);
+}
+.story-polaroid:nth-child(4)::after {
+  bottom: 20px;
+  right: -8px;
+  width: 28px;
+  height: 65px;
+  transform: rotate(-12deg);
+}
+
+/* Fifth polaroid - multiple small pieces */
+.story-polaroid:nth-child(5)::before {
+  top: -6px;
+  right: 40px;
+  width: 40px;
+  height: 20px;
+  transform: rotate(25deg);
+}
+.story-polaroid:nth-child(5)::after {
+  top: -8px;
+  left: 25px;
+  width: 35px;
+  height: 18px;
+  transform: rotate(-20deg);
+}
+
+/* Sixth polaroid - asymmetric */
+.story-polaroid:nth-child(6)::before {
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%) rotate(5deg);
+  width: 90px;
+  height: 35px;
+}
+.story-polaroid:nth-child(6)::after {
+  top: 15px;
+  left: -10px;
+  width: 25px;
+  height: 60px;
+  transform: rotate(-8deg);
+}
+
+/* Seventh polaroid - corner reinforcement */
+.story-polaroid:nth-child(7)::before {
+  top: -8px;
+  right: -8px;
+  width: 50px;
+  height: 50px;
+  transform: rotate(20deg);
+}
+.story-polaroid:nth-child(7)::after {
+  bottom: -12px;
+  left: 40px;
+  width: 75px;
+  height: 30px;
+  transform: rotate(-10deg);
+}
+
+.story-polaroid:nth-child(1) { 
+  --rotation: -3deg; 
+  animation-delay: 0.2s;
+}
+.story-polaroid:nth-child(2) { 
+  --rotation: 2deg; 
+  animation-delay: 0.4s;
+}
+.story-polaroid:nth-child(3) { 
+  --rotation: -1deg; 
+  animation-delay: 0.6s;
+}
+
+@keyframes polaroidAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) rotate(var(--rotation, 0deg)) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(var(--rotation, 0deg)) scale(1);
+  }
+}
+
+.story-polaroid:hover {
+  filter: grayscale(0%);
+  transform: rotate(0deg) scale(1.05);
+  z-index: 10;
+}
+
+.story-polaroid-image {
+  height: 250px;
+  width: 100%;
+  overflow: hidden;
+  padding-bottom: 5px;
+}
+
+.story-polaroid-image img {
+  height: 100%;
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.story-polaroid-caption {
+  font-family: "Permanent Marker";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  padding-top: 10px;
+  color: #000;
+  text-align: center;
+  line-height: 1.2;
+  text-transform: lowercase;
+}
+
+.story-polaroid-date {
+  text-align: center;
+  font-size: 12px;
+  color: #666;
+  margin-top: 5px;
+  font-family: "Lato", sans-serif;
+  text-transform: lowercase;
+}
+
+/* Timeline Section */
+.story-reflection-section {
+  padding-top: 4rem;
+}
+
+.story-reflection-section .story-text {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .spider-tag-large {
+    padding: 1rem 4rem 8rem;
+    font-size: 1.3rem;
+  }
+  
+  .spider-tag-large strong {
+    font-size: 2.5rem;
+  }
+  
+  .spider-tag-large:before {
+    top: 7rem;
+    height: 6.5rem;
+  }
+  
+  .spider-tag-large:after {
+    font-size: 1.4rem;
+    top: 8.5rem;
+    letter-spacing: 0.1rem;
+  }
+  
+  
+  .story-text {
+    font-size: 1.2rem;
+  }
+  
+  .story-polaroids {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  
+  .story-polaroid {
+    width: 280px;
+    height: 330px;
+  }
+  
+  .story-polaroid-image {
+    height: 220px;
+  }
+  
+  .story-polaroid-image iframe {
+    width: 260px;
+    height: 180px;
+  }
+}
+
+/* Progressive click animations */
+.easter-egg-trigger.click-1 {
+  background-size: 6px 6px;
+  opacity: 0.4;
+  animation: expandDots1 0.3s ease-out;
+}
+
+@keyframes expandDots1 {
+  0% {
+    transform: scale(1);
+    background-size: 10px 10px;
+  }
+  50% {
+    transform: scale(1.2);
+    background-size: 6px 6px;
+  }
+  100% {
+    transform: scale(1);
+    background-size: 6px 6px;
+  }
+}
+
+.easter-egg-trigger.click-2 {
+  background-size: 4px 4px;
+  opacity: 0.6;
+  animation: expandDots2 0.3s ease-out;
+}
+
+@keyframes expandDots2 {
+  0% {
+    transform: scale(1);
+    background-size: 6px 6px;
+  }
+  50% {
+    transform: scale(1.3);
+    background-size: 4px 4px;
+  }
+  100% {
+    transform: scale(1);
+    background-size: 4px 4px;
+  }
+}
+
+.easter-egg-trigger.click-ready {
+  background-size: 2px 2px;
+  opacity: 0.9;
+  animation: finalExpand 0.4s ease-out;
+}
+
+@keyframes finalExpand {
+  0% {
+    transform: scale(1);
+    background-size: 4px 4px;
+  }
+  50% {
+    transform: scale(1.5);
+    background-size: 2px 2px;
+  }
+  100% {
+    transform: scale(1);
+    background-size: 2px 2px;
+  }
+}
+
+@keyframes readyPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(235, 29, 54, 0.4),
+                0 0 20px rgba(235, 29, 54, 0.6);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 10px rgba(235, 29, 54, 0),
+                0 0 30px rgba(235, 29, 54, 0.8);
+  }
+}
+
+/* Spider web crack effect */
+.web-crack {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 100px;
+  height: 100px;
+  pointer-events: none;
+  transform: translate(50%, 50%);
+  opacity: 0;
+}
+
+.web-crack::before,
+.web-crack::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 50px;
+  background: linear-gradient(to bottom, #eb1d36, transparent);
+  transform-origin: top center;
+}
+
+.web-crack::before {
+  transform: translate(-50%, 0) rotate(45deg);
+}
+
+.web-crack::after {
+  transform: translate(-50%, 0) rotate(-45deg);
+}
+
+/* Additional crack lines */
+.web-crack span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(235, 29, 54, 0.6), transparent);
+  transform-origin: top center;
+}
+
+.web-crack span:nth-child(1) {
+  transform: translate(-50%, 0) rotate(0deg);
+}
+
+.web-crack span:nth-child(2) {
+  transform: translate(-50%, 0) rotate(90deg);
+}
+
+.web-crack span:nth-child(3) {
+  transform: translate(-50%, 0) rotate(22.5deg);
+}
+
+.web-crack span:nth-child(4) {
+  transform: translate(-50%, 0) rotate(-22.5deg);
+}
+
+.web-crack.show {
+  animation: crackAppear 0.3s ease-out forwards;
+}
+
+@keyframes crackAppear {
+  from {
+    opacity: 0;
+    transform: translate(50%, 50%) scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: translate(50%, 50%) scale(1);
+  }
 }
 
 section {
