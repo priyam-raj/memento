@@ -11,38 +11,92 @@
     <link rel="icon" href="assets/priyamrajlogo.png" type="image/x-icon" />
     <link rel="apple-touch-icon" href="assets/priyamrajlogo.png" />
 
-
+    <!-- Umami Analytics -->
+    <script defer src="https://warplabs-umami.up.railway.app/script.js" data-website-id="9eae8ee1-6ecb-4e0e-b058-5f0046df65d7"></script>
 
 </head>
 
 <body>
-
-    <main class='main-content'>
-        <div class="intro-lines">
-            <div class="name-with-photo">
-                <img src="media/priyam-chicago.jpeg" alt="Priyam Raj" class="profile-photo">
-                <p class="name-intro">Hello, I'm Priyam Raj.</p>
+    <div class="mac-desktop">
+        <div class="mac-window">
+            <div class="window-header">
+                <div class="window-controls">
+                    <span class="control close"></span>
+                    <span class="control minimize"></span>
+                    <span class="control maximize"></span>
+                </div>
+                <span class="window-title">Priyam Raj</span>
+                <span class="window-version" onclick="window.location.href='story.html'">
+                    v1.0
+                    <span class="tooltip">Click to see my story</span>
+                </span>
             </div>
-            <p>I'm <span id="age">23</span> years old and the founder of <a href="https://tubemagic.com"
-                    target="_blank">TubeMagic</a> and <a href="https://vid.ai" target="_blank">Vid.AI</a>.</p>
-            <p>Both SaaS products have achieved $1M+ ARR in under 2 years.</p>
-            <p>Currently building <a href="https://warplabs.co" target="_blank">Warplabs</a>, a software development
-                studio.</p>
-            <p>📍 Based in Bangalore, India.</p>
+            <div class="window-tabs">
+                <button class="tab active" onclick="showTab('profile')">Profile</button>
+                <button class="tab" onclick="showTab('games')">Games</button>
+            </div>
+            <main class='window-content'>
+                <div id="profile-tab" class="tab-content active">
+                    <div class="profile-header">
+                    <div class="profile-photo-container">
+                        <img src="media/best-picture.jpeg" alt="Priyam Raj" class="profile-photo">
+                    </div>
+                    <div class="profile-text">
+                        <h1 class="name">Priyam Raj</h1>
+                        <p class="tagline">Building cool stuff on the internet</p>
+                        <p class="age"><span id="age">23</span> years old • Bangalore, India</p>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <div class="info-box">
+                        <h3>Founded</h3>
+                        <p><a href="https://tubemagic.com" target="_blank">TubeMagic</a> • <a href="https://vid.ai" target="_blank">Vid.AI</a></p>
+                        <p class="sub">$1M+ ARR in under 2 years</p>
+                    </div>
+                    <div class="info-box">
+                        <h3>Currently Building</h3>
+                        <p><a href="https://warplabs.co" target="_blank">Warplabs</a></p>
+                        <p class="sub">App Portfolio Company</p>
+                    </div>
+                </div>
+
+                <div class="contact-section">
+                    <h3>Connect</h3>
+                    <div class="button-group">
+                        <a href="https://instagram.com/priymrj" target="_blank" class="mac-button">Instagram</a>
+                        <a href="https://twitter.com/priymrj" target="_blank" class="mac-button">Twitter</a>
+                        <a href="mailto:hello@priyamraj.com" class="mac-button">Email</a>
+                        <a href="https://youtube.com/@priyam-raj" target="_blank" class="mac-button">YouTube</a>
+                        <a href="https://linkedin.com/in/priyamraj" target="_blank" class="mac-button">LinkedIn</a>
+                    </div>
+                </div>
+                </div>
+                
+                <div id="games-tab" class="tab-content">
+                    <div class="folder-view">
+                        <div class="folder-item" onclick="openGame('spaceInvaders')">
+                            <div class="folder-icon game-icon">👾</div>
+                            <p class="folder-name">Space Invaders</p>
+                        </div>
+                    </div>
+                    <div id="game-window" class="game-window" style="display: none;">
+                        <div class="game-header">
+                            <span class="game-title">Space Invaders</span>
+                            <button class="close-game" onclick="closeGame()">✕</button>
+                        </div>
+                        <div class="game-container">
+                            <canvas id="gameCanvas" width="600" height="400"></canvas>
+                            <div class="game-controls">
+                                <p>Use ← → arrows to move, SPACE to shoot</p>
+                                <button onclick="startGame()">Start Game</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
         </div>
-
-        <section class="contact-section">
-            <h2>Contact</h2>
-            <div class="contact-lines">
-                <p>DM me on <a href="https://instagram.com/priymrj" target="_blank">Instagram</a> or <a
-                        href="https://twitter.com/priymrj" target="_blank">Twitter</a>.</p>
-
-                <p>Or drop your mail on <a href="mailto:hello@priyamraj.com">hello@priyamraj.com</a>.</p>
-                <p>Follow on <a href="https://youtube.com/@priyam-raj" target="_blank">YouTube</a> and <a
-                        href="https://linkedin.com/in/priyamraj" target="_blank">LinkedIn</a>.</p>
-            </div>
-        </section>
-    </main>
+    </div>
 
 
 
@@ -51,7 +105,7 @@
 
 
     <!-- Easter egg trigger -->
-    <div class="easter-egg-trigger" title="Into the Spider-Verse"></div>
+    <div class="easter-egg-trigger" title="Into the Spider-Verse" onclick="window.location.href='story.html'"></div>
     <div class="web-crack">
         <span></span>
         <span></span>
@@ -61,6 +115,222 @@
 
 
     <script src="scripts/script.js" async defer></script>
+    <script>
+        // Create audio context and sound functions
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        function playSound(frequency, duration, type = 'square') {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = frequency;
+            oscillator.type = type;
+            
+            gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + duration);
+        }
+        
+        const sounds = {
+            shoot: () => playSound(600, 0.1),
+            hit: () => playSound(200, 0.2, 'sawtooth'),
+            gameOver: () => {
+                playSound(150, 0.3);
+                setTimeout(() => playSound(100, 0.4), 300);
+            }
+        };
+
+        // Tab switching
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(tab => tab.classList.remove('active'));
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected tab content
+            document.getElementById(tabName + '-tab').classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+        
+        // Game window functions
+        function openGame(gameName) {
+            const gameWindow = document.getElementById('game-window');
+            gameWindow.style.display = 'block';
+        }
+        
+        function closeGame() {
+            const gameWindow = document.getElementById('game-window');
+            gameWindow.style.display = 'none';
+            game.active = false;
+        }
+
+        // Space Invaders Game
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        let game = {
+            active: false,
+            score: 0,
+            player: { x: 300, y: 350, width: 40, height: 20 },
+            bullets: [],
+            invaders: [],
+            invaderBullets: [],
+            invaderDirection: 1,
+            invaderSpeed: 0.5
+        };
+
+        // Initialize invaders
+        function initInvaders() {
+            game.invaders = [];
+            for (let row = 0; row < 4; row++) {
+                for (let col = 0; col < 8; col++) {
+                    game.invaders.push({
+                        x: col * 60 + 60,
+                        y: row * 40 + 40,
+                        width: 30,
+                        height: 20,
+                        alive: true
+                    });
+                }
+            }
+        }
+
+        // Game controls
+        const keys = {};
+        document.addEventListener('keydown', (e) => {
+            keys[e.key] = true;
+            if (e.key === ' ' && game.active) {
+                shoot();
+                e.preventDefault();
+            }
+        });
+        document.addEventListener('keyup', (e) => keys[e.key] = false);
+
+        function shoot() {
+            game.bullets.push({
+                x: game.player.x + game.player.width / 2 - 2,
+                y: game.player.y,
+                width: 4,
+                height: 10,
+                speed: 5
+            });
+            sounds.shoot();
+        }
+
+        function update() {
+            if (!game.active) return;
+
+            // Move player
+            if (keys['ArrowLeft'] && game.player.x > 0) {
+                game.player.x -= 5;
+            }
+            if (keys['ArrowRight'] && game.player.x < canvas.width - game.player.width) {
+                game.player.x += 5;
+            }
+
+            // Update bullets
+            game.bullets = game.bullets.filter(bullet => {
+                bullet.y -= bullet.speed;
+                return bullet.y > 0;
+            });
+
+            // Update invaders
+            let hitEdge = false;
+            game.invaders.forEach(invader => {
+                if (!invader.alive) return;
+                invader.x += game.invaderSpeed * game.invaderDirection;
+                if (invader.x <= 0 || invader.x >= canvas.width - invader.width) {
+                    hitEdge = true;
+                }
+            });
+
+            if (hitEdge) {
+                game.invaderDirection *= -1;
+                game.invaders.forEach(invader => {
+                    invader.y += 20;
+                });
+            }
+
+            // Collision detection
+            game.bullets.forEach(bullet => {
+                game.invaders.forEach(invader => {
+                    if (invader.alive &&
+                        bullet.x < invader.x + invader.width &&
+                        bullet.x + bullet.width > invader.x &&
+                        bullet.y < invader.y + invader.height &&
+                        bullet.y + bullet.height > invader.y) {
+                        invader.alive = false;
+                        bullet.y = -100;
+                        game.score += 10;
+                        sounds.hit();
+                    }
+                });
+            });
+
+            // Check win condition
+            if (game.invaders.every(invader => !invader.alive)) {
+                game.active = false;
+                sounds.gameOver();
+                setTimeout(() => alert('You Win! Score: ' + game.score), 500);
+            }
+        }
+
+        function draw() {
+            // Clear canvas
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            if (!game.active) return;
+
+            // Draw player
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(game.player.x, game.player.y, game.player.width, game.player.height);
+
+            // Draw bullets
+            game.bullets.forEach(bullet => {
+                ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+            });
+
+            // Draw invaders
+            game.invaders.forEach(invader => {
+                if (invader.alive) {
+                    ctx.fillRect(invader.x, invader.y, invader.width, invader.height);
+                }
+            });
+
+            // Draw score
+            ctx.font = '16px Courier New';
+            ctx.fillText('Score: ' + game.score, 10, 25);
+        }
+
+        function gameLoop() {
+            update();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        function startGame() {
+            game.active = true;
+            game.score = 0;
+            game.bullets = [];
+            game.invaderBullets = [];
+            game.player.x = 300;
+            initInvaders();
+        }
+
+        // Start game loop
+        gameLoop();
+    </script>
 </body>
 
 </html>
