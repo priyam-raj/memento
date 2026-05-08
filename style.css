@@ -1212,10 +1212,10 @@ h1 {
 
 .about-hero img {
   width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 16 / 10;
   display: block;
   object-fit: cover;
-  object-position: center 44%;
+  object-position: center 64%;
 }
 
 .about-hero figcaption {
@@ -1999,8 +1999,8 @@ h2 {
     aspect-ratio: 16 / 11;
   }
 
-  .about-hero figure {
-    aspect-ratio: 16 / 11;
+  .about-hero img {
+    aspect-ratio: 16 / 10;
   }
 
   .proof-strip,
@@ -2197,6 +2197,10 @@ h2 {
 
   .archive-grid {
     grid-template-columns: 1fr;
+  }
+
+  .about-hero img {
+    aspect-ratio: 4 / 3;
   }
 
   .archive-grid img {
