@@ -1047,7 +1047,8 @@ h1 {
   display: grid;
 }
 
-.press-list a {
+.press-list > a,
+.press-list > .press-item {
   display: grid;
   grid-template-columns: 150px minmax(0, 1fr) auto;
   gap: 18px;
@@ -1056,7 +1057,8 @@ h1 {
   border-bottom: 1px solid var(--line);
 }
 
-.press-list a:last-child {
+.press-list > a:last-child,
+.press-list > .press-item:last-child {
   border-bottom: 0;
   padding-bottom: 0;
 }
@@ -1079,6 +1081,28 @@ h1 {
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
+}
+
+.press-cluster {
+  align-items: start;
+}
+
+.press-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  justify-content: flex-end;
+}
+
+.press-links a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .video-links {
@@ -2111,7 +2135,8 @@ h2 {
 
   .press-kicker,
   .press-lead,
-  .press-list a {
+  .press-list > a,
+  .press-list > .press-item {
     grid-template-columns: 1fr;
   }
 
@@ -2123,12 +2148,17 @@ h2 {
     gap: 16px;
   }
 
-  .press-list a {
+  .press-list > a,
+  .press-list > .press-item {
     gap: 8px;
   }
 
   .press-list strong {
     font-size: 19px;
+  }
+
+  .press-links {
+    justify-content: flex-start;
   }
 
   .about-profile,
