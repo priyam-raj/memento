@@ -113,7 +113,8 @@ main {
 }
 
 .challenge-hero {
-  grid-template-columns: minmax(0, 1fr) minmax(300px, 390px);
+  grid-template-columns: minmax(0, 880px);
+  justify-content: start;
 }
 
 .hero-copy,
@@ -2092,6 +2093,49 @@ h2 {
   line-height: 1.56;
 }
 
+.tools-stack {
+  display: grid;
+  gap: 14px;
+}
+
+.featured-tool {
+  min-height: 220px;
+  display: grid;
+  align-content: end;
+  padding: clamp(24px, 4vw, 36px);
+  border: 1px solid rgba(0, 113, 227, 0.18);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(235, 245, 255, 0.9)),
+    var(--surface-strong);
+  box-shadow: 0 18px 48px rgba(0, 113, 227, 0.1);
+}
+
+.featured-tool span,
+.featured-tool em {
+  color: var(--blue);
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.featured-tool strong {
+  display: block;
+  margin: 8px 0 8px;
+  font-size: clamp(38px, 6vw, 64px);
+  line-height: 0.95;
+  letter-spacing: -0.052em;
+  font-weight: 560;
+}
+
+.featured-tool p {
+  max-width: 520px;
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.48;
+}
+
 .resource-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2111,6 +2155,12 @@ h2 {
 
 .resource-grid a:hover strong {
   color: var(--blue);
+}
+
+.compact-resource-grid a,
+.compact-resource-grid article {
+  min-height: auto;
+  padding: 18px;
 }
 
 .challenge-cta {
