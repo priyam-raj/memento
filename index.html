@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Priyam Raj · Creator Software Entrepreneur</title>
-    <meta name="description" content="Priyam Raj builds creator software from Bangalore: Vid.AI, TypeVoice, moonn, TubeMagic, and logs.so. Billions of views, two acquisitions, $1M+ a year.">
+    <meta name="description" content="Priyam Raj builds creator software from Bangalore: Vid.AI, TypeVoice, moonn, TubeMagic, and logs.so. Creators have made videos with billions of views on his tools; two acquisitions; $1M+ a year.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#faf9f5">
     <link rel="canonical" href="https://priyamraj.com/">
@@ -23,7 +23,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="home.css?v=10">
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem('theme');
+                if (t !== 'dark' && t !== 'light') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                document.documentElement.dataset.theme = t;
+            } catch (e) { }
+        })();
+    </script>
+    <link rel="stylesheet" href="home.css?v=11">
     <link rel="icon" href="assets/priyamrajlogo.png" type="image/png">
     <link rel="apple-touch-icon" href="assets/priyamrajlogo.png">
 
@@ -36,7 +45,7 @@
       "@id": "https://priyamraj.com/#person",
       "name": "Priyam Raj",
       "url": "https://priyamraj.com/",
-      "image": "https://priyamraj.com/media/priyam-chicago.jpeg",
+      "image": "https://priyamraj.com/media/times-square-priyam.jpg",
       "jobTitle": "Creator Software Entrepreneur",
       "worksFor": { "@type": "Organization", "name": "Warplabs", "url": "https://warplabs.co" },
       "description": "Entrepreneur from Bangalore, India. Sold Morise.ai and Timenite; now building Vid.AI, TypeVoice, moonn, TubeMagic, and logs.so.",
@@ -59,8 +68,10 @@
             <a class="brand" href="/">Priyam Raj</a>
             <nav>
                 <a href="/story">Story</a>
+                <a href="/reviewed">Reviewed</a>
                 <a href="https://priyamventures.com" target="_blank" rel="noreferrer">Ventures</a>
                 <a href="mailto:hello@priyamraj.com">Contact</a>
+                <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme">Dark</button>
             </nav>
         </header>
 
@@ -68,17 +79,17 @@
             <section class="intro" aria-labelledby="page-title">
                 <div>
                     <h1 id="page-title">I build software for <em>creators</em>.</h1>
-                    <p class="intro-note">I've been making things on the internet since I was twelve; the last decade of it is creator software, built from Bangalore. Right now that's <a href="https://vid.ai" target="_blank" rel="noreferrer">Vid.AI</a>, <a href="https://typevoice.ai" target="_blank" rel="noreferrer">TypeVoice</a>, <a href="https://moonn.com" target="_blank" rel="noreferrer">moonn</a>, <a href="https://tubemagic.com" target="_blank" rel="noreferrer">TubeMagic</a>, and <a href="https://logs.so" target="_blank" rel="noreferrer">logs.so</a>. Billions of views run through my tools, and this page keeps the receipts.</p>
+                    <p class="intro-note">I've been making things on the internet since I was twelve; the last decade of it is creator software, built from Bangalore. Right now that's <a href="https://vid.ai" target="_blank" rel="noreferrer">Vid.AI</a>, <a href="https://typevoice.ai" target="_blank" rel="noreferrer">TypeVoice</a>, <a href="https://moonn.com" target="_blank" rel="noreferrer">moonn</a>, <a href="https://tubemagic.com" target="_blank" rel="noreferrer">TubeMagic</a>, and <a href="https://logs.so" target="_blank" rel="noreferrer">logs.so</a>. Creators have made videos with billions of views using my tools, and this page keeps the receipts.</p>
                     <p class="intro-stats" aria-label="Highlights">two acquisitions <span>·</span> $1M+ a year <span>·</span> billions of views <span>·</span> shipping since 2011</p>
                 </div>
                 <figure>
-                    <img id="hero-portrait" src="media/priyam-chicago.jpeg" alt="Priyam Raj in Chicago" data-full="media/priyam-chicago.jpeg" data-caption="Chicago">
-                    <figcaption>Priyam, Chicago</figcaption>
+                    <img id="hero-portrait" src="media/times-square-priyam.jpg" alt="Priyam Raj in Times Square at night" data-full="media/times-square-priyam.jpg" data-caption="Times Square, New York">
+                    <figcaption>Priyam, Times Square</figcaption>
                 </figure>
             </section>
 
             <section aria-labelledby="now-label">
-                <p class="sec-label" id="now-label">Now building</p>
+                <p class="sec-label" id="now-label"><span class="idx">01</span>Now building</p>
                 <ul class="now">
                     <li>
                         <a href="https://vid.ai" target="_blank" rel="noreferrer">
@@ -121,37 +132,44 @@
 
 
             <section aria-labelledby="numbers-label">
-                <p class="sec-label" id="numbers-label">The numbers</p>
-                <ol class="ledger">
-                    <li>
-                        <span class="when">Views</span>
-                        <div class="what"><p>Billions, across Vid.AI, TubeMagic, Morise, and Timenite.</p></div>
-                    </li>
-                    <li>
-                        <span class="when">Revenue</span>
-                        <div class="what"><p>$1M+ a year across my products. <span class="quiet">Top 20 highest-revenue startups globally on TrustMRR.</span></p></div>
-                    </li>
-                    <li>
-                        <span class="when">Exits</span>
-                        <div class="what"><p>Morise.ai (2024), Timenite (2023).</p></div>
-                    </li>
-                    <li>
-                        <span class="when">Used by</span>
-                        <div class="what"><p>Creators from Disney, CoinDCX, Sidemen, MrBeast.</p></div>
-                    </li>
-                    <li>
-                        <span class="when">Audience</span>
-                        <div class="what"><p>22K on YouTube, 11K on X, 5K on Instagram.</p></div>
-                    </li>
-                    <li>
-                        <span class="when">Studio</span>
-                        <div class="what"><p>Warplabs ships all of it. <a class="rcpt" href="https://warplabs.co" target="_blank" rel="noreferrer">warplabs.co ↗</a></p></div>
-                    </li>
-                </ol>
+                <p class="sec-label" id="numbers-label"><span class="idx">02</span>The numbers</p>
+                <dl class="receipts">
+                    <div class="r-row">
+                        <dt>Views</dt>
+                        <span class="lead" aria-hidden="true"></span>
+                        <dd>Billions</dd>
+                    </div>
+                    <div class="r-row">
+                        <dt>Revenue</dt>
+                        <span class="lead" aria-hidden="true"></span>
+                        <dd>$1M+ a year</dd>
+                    </div>
+                    <div class="r-row">
+                        <dt>Exits</dt>
+                        <span class="lead" aria-hidden="true"></span>
+                        <dd>Morise.ai 2024 · Timenite 2023</dd>
+                    </div>
+                    <div class="r-row">
+                        <dt>Used by</dt>
+                        <span class="lead" aria-hidden="true"></span>
+                        <dd>Creators from Disney, CoinDCX, Sidemen, MrBeast</dd>
+                    </div>
+                    <div class="r-row">
+                        <dt>Audience</dt>
+                        <span class="lead" aria-hidden="true"></span>
+                        <dd>22K YouTube · 11K X · 5K Instagram</dd>
+                    </div>
+                    <div class="r-row">
+                        <dt>Studio</dt>
+                        <span class="lead" aria-hidden="true"></span>
+                        <dd><a class="rcpt" href="https://warplabs.co" target="_blank" rel="noreferrer">warplabs.co ↗</a></dd>
+                    </div>
+                </dl>
+                <p class="receipts-note">Views: combined across videos creators made with Vid.AI · top 20 highest-revenue startups on <a href="https://trustmrr.com/startup/vidai-llc" target="_blank" rel="noreferrer">TrustMRR ↗</a></p>
             </section>
 
             <section aria-labelledby="record-label">
-                <p class="sec-label" id="record-label">The record</p>
+                <p class="sec-label" id="record-label"><span class="idx">03</span>The record</p>
                 <ol class="ledger spine">
                     <li>
                         <span class="when">2026</span>
@@ -168,7 +186,7 @@
                     <li>
                         <span class="when">2024–</span>
                         <div class="what">
-                            <p>I'm building Vid.AI with my co-founder <a href="https://www.youtube.com/@MakeMoneyMatt" target="_blank" rel="noreferrer">Matt</a>. <strong>Billions of views</strong> generated, and a surprise cameo in a John Oliver segment on HBO. <a class="rcpt" href="https://www.youtube.com/watch?v=TWpg1RmzAbc&amp;t=787s" target="_blank" rel="noreferrer">HBO ↗</a></p>
+                            <p>I'm building Vid.AI with my co-founder <a href="https://www.youtube.com/@MakeMoneyMatt" target="_blank" rel="noreferrer">Matt</a>. Our users' videos have crossed <strong>billions of views</strong> combined, and the product got a surprise cameo in a John Oliver segment on HBO. <a class="rcpt" href="https://www.youtube.com/watch?v=TWpg1RmzAbc&amp;t=787s" target="_blank" rel="noreferrer">HBO ↗</a></p>
                         </div>
                     </li>
                     <li>
@@ -265,12 +283,8 @@
             </section>
 
             <section aria-labelledby="gallery-label">
-                <p class="sec-label" id="gallery-label">People &amp; places</p>
+                <p class="sec-label" id="gallery-label"><span class="idx">04</span>People &amp; places</p>
                 <div class="gallery">
-                    <figure>
-                        <img src="media/times-square-priyam.jpg" alt="In Times Square at night" data-full="media/times-square-priyam.jpg" data-caption="Times Square, New York" loading="lazy">
-                        <figcaption>Times Square, New York</figcaption>
-                    </figure>
                     <figure>
                         <img src="media/miami-yacht-speech.jpg" alt="Talking tech on a yacht in Miami" data-full="media/miami-yacht-speech.jpg" data-caption="Miami, on the water" loading="lazy">
                         <figcaption>Miami, on the water</figcaption>
@@ -310,10 +324,10 @@
 
 
             <section class="footnotes" aria-labelledby="footnotes-label">
-                <p class="sec-label" id="footnotes-label">Footnotes · side quests</p>
+                <p class="sec-label" id="footnotes-label"><span class="idx">05</span>Footnotes · side quests</p>
                 <ol>
                     <li>My voice is one of the most popular Indian voices on ElevenLabs.</li>
-                    <li>Vid.AI got a surprise cameo in a John Oliver segment on HBO. Nobody warned me.
+                    <li>Vid.AI got a surprise cameo in a John Oliver segment on HBO.
                         <span class="press-links">
                             <a href="https://www.youtube.com/watch?v=TWpg1RmzAbc&amp;t=787s" target="_blank" rel="noreferrer">HBO ↗</a>
                         </span>
@@ -344,6 +358,22 @@
 
     <script>
         (() => {
+            // theme
+            const root = document.documentElement;
+            const themeBtn = document.querySelector('[data-theme-toggle]');
+            const themeMeta = document.querySelector('meta[name="theme-color"]');
+            const paintTheme = (t) => {
+                root.dataset.theme = t;
+                if (themeMeta) themeMeta.content = t === 'dark' ? '#151412' : '#faf9f5';
+                if (themeBtn) themeBtn.textContent = t === 'dark' ? 'Light' : 'Dark';
+            };
+            paintTheme(root.dataset.theme === 'dark' ? 'dark' : 'light');
+            if (themeBtn) themeBtn.addEventListener('click', () => {
+                const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+                try { localStorage.setItem('theme', next); } catch (e) { }
+                paintTheme(next);
+            });
+
             // lightbox
             const dlg = document.getElementById('lightbox');
             const dlgImg = dlg.querySelector('img');
