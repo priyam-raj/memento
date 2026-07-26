@@ -18,6 +18,11 @@
   box-sizing: border-box;
 }
 
+::selection {
+  background: var(--blue);
+  color: #fff;
+}
+
 html {
   min-height: 100%;
   scroll-behavior: smooth;

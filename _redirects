@@ -1,3 +1,5 @@
+/about / 301
+/about/* / 301
 /instagram https://www.instagram.com/priymrj
 /twitter https://twitter.com/priymrj
 /youtube https://youtube.com/priverse
@@ -6,7 +8,7 @@
 /freetoclaim https://freetoclaim.com
 /project-multiverse https://projectmultiverse.com
 /timenite-daily https://github.com/priyam-raj/timenite-daily
-/contact https://priyamraj.com
+/contact / 301
 /gear https://kit.co/priyamraj
 /priyams-gallery https://www.instagram.com/priyamsgallery/
 /shop https://priyamraj.gumroad.com/
@@ -15,5 +17,6 @@
 /links https://priyamraj.bio.link
 /newsletter https://priyamraj.substack.com/
 /timeline https://priyamraj.com/story
+/consumer-app-challenge/* / 301
 
 /avenge-the-fallen-avengers-endgame-new-cover-template-psd/ https://priyamraj.myportfolio.com/avenge-the-fallen-avengers-endgame-new-cover-template-psd/

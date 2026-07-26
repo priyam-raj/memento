@@ -3,37 +3,50 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page not found — Priyam Raj</title>
+    <title>Page not found · Priyam Raj</title>
     <meta name="description" content="The page you are looking for does not exist.">
     <meta name="robots" content="noindex">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/style.css?v=77">
-    <link rel="icon" href="/assets/priyamrajlogo.png" type="image/x-icon">
+    <meta name="theme-color" content="#faf9f5">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/home.css?v=10">
+    <link rel="icon" href="/assets/priyamrajlogo.png" type="image/png">
     <link rel="apple-touch-icon" href="/assets/priyamrajlogo.png">
 </head>
 <body>
-    <header class="site-nav" aria-label="Primary">
-        <a class="brand-mark" href="/">Priyam Raj</a>
-        <nav>
-            <a href="/about/">About</a>
-            <a href="/reviewed/">Reviewed</a>
-            <a href="https://priyamventures.com" target="_blank" rel="noreferrer">Ventures</a>
-            <a href="mailto:hello@priyamraj.com">Contact</a>
-        </nav>
-    </header>
+    <div class="page">
+        <header class="mast" aria-label="Primary">
+            <a class="brand" href="/">Priyam Raj</a>
+            <nav>
+                <a href="https://priyamventures.com" target="_blank" rel="noreferrer">Ventures</a>
+                <a href="mailto:hello@priyamraj.com">Contact</a>
+            </nav>
+        </header>
 
-    <main>
-        <section class="review-hero" aria-labelledby="not-found-title">
-            <div class="review-copy">
-                <p class="eyebrow">404</p>
-                <h1 id="not-found-title">This page is not here.</h1>
-                <p class="lead">The link may have moved, or the page may not exist anymore.</p>
-                <div class="actions">
-                    <a class="button primary" href="/">Go home</a>
-                    <a class="button secondary" href="/reviewed/">Open Reviewed</a>
+        <main>
+            <section class="intro" aria-labelledby="not-found-title">
+                <div>
+                    <p class="sec-label">404</p>
+                    <h1 id="not-found-title">No record of this page.</h1>
+                    <p class="intro-note">The link may have moved, or it was never entered in the ledger.</p>
+                    <div class="cta-row">
+                        <a class="btn" href="/">Back to the record</a>
+                        <a class="btn-ghost" href="/story">The story</a>
+                    </div>
                 </div>
-            </div>
-        </section>
-    </main>
+            </section>
+        </main>
+
+        <footer class="site-foot">
+            <span class="fine">Priyam Raj &middot; Bangalore &middot; records since 2011</span>
+            <nav aria-label="Footer">
+                <a href="/">Home</a>
+                <a href="/story">Story</a>
+                <a href="mailto:hello@priyamraj.com">Email</a>
+            </nav>
+        </footer>
+    </div>
 </body>
 </html>
