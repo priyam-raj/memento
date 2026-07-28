@@ -25,6 +25,7 @@
   --hairline: rgba(231, 228, 221, 0.16);
   --hairline-soft: rgba(231, 228, 221, 0.09);
   --oxide: #c7603a;
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
@@ -38,7 +39,6 @@ body {
   line-height: 1.62;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  transition: background 240ms ease, color 240ms ease;
 }
 
 a { color: inherit; text-decoration: none; }
@@ -84,20 +84,40 @@ img, video { display: block; max-width: 100%; }
 .mast nav a { color: var(--ink-faint); transition: color 140ms ease; }
 .mast nav a:hover { color: var(--ink); }
 
-.theme-toggle {
+/* ---------- section head + record filter ---------- */
+
+.sec-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin-bottom: 26px;
+}
+
+.sec-head .sec-label { margin: 0; }
+
+.track-switch { display: inline-flex; }
+
+.track-switch button {
   border: 0;
-  padding: 0;
   background: none;
   cursor: pointer;
+  padding: 0 10px;
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 10px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--oxide);
+  color: var(--ink-faint);
   transition: color 140ms ease;
 }
 
-.theme-toggle:hover { color: var(--ink); }
+.track-switch button + button { border-left: 1px solid var(--hairline); }
+.track-switch button:last-child { padding-right: 0; }
+.track-switch button:hover { color: var(--ink); }
+.track-switch button[aria-pressed="true"] { color: var(--oxide); }
+
+.ledger.is-public li[data-track="personal"] { display: none; }
 
 /* ---------- intro ---------- */
 

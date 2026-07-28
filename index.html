@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Priyam Raj · Creator Software Entrepreneur</title>
     <meta name="description" content="Priyam Raj builds creator software from Bangalore: Vid.AI, TypeVoice, moonn, TubeMagic, and logs.so. Creators have made videos with billions of views on his tools; two acquisitions; $1M+ a year.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#faf9f5">
+    <meta name="theme-color" content="#151412">
     <link rel="canonical" href="https://priyamraj.com/">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Priyam Raj · Creator Software Entrepreneur">
@@ -23,16 +23,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&display=swap" rel="stylesheet">
-    <script>
-        (function () {
-            try {
-                var t = localStorage.getItem('theme');
-                if (t !== 'dark' && t !== 'light') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-                document.documentElement.dataset.theme = t;
-            } catch (e) { }
-        })();
-    </script>
-    <link rel="stylesheet" href="home.css?v=11">
+    <link rel="stylesheet" href="home.css?v=12">
     <link rel="icon" href="assets/priyamrajlogo.png" type="image/png">
     <link rel="apple-touch-icon" href="assets/priyamrajlogo.png">
 
@@ -70,7 +61,6 @@
                 <a href="/story">Story</a>
                 <a href="https://priyamventures.com" target="_blank" rel="noreferrer">Ventures</a>
                 <a href="mailto:hello@priyamraj.com">Contact</a>
-                <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme">Dark</button>
             </nav>
         </header>
 
@@ -168,8 +158,14 @@
             </section>
 
             <section aria-labelledby="record-label">
-                <p class="sec-label" id="record-label"><span class="idx">03</span>The record</p>
-                <ol class="ledger spine">
+                <div class="sec-head">
+                    <p class="sec-label" id="record-label"><span class="idx">03</span>The record</p>
+                    <div class="track-switch" role="group" aria-label="Filter the record">
+                        <button type="button" data-track-btn="public" aria-pressed="true" aria-controls="record">Public</button>
+                        <button type="button" data-track-btn="all" aria-pressed="false" aria-controls="record">Everything</button>
+                    </div>
+                </div>
+                <ol class="ledger spine is-public" id="record">
                     <li>
                         <span class="when">2026</span>
                         <div class="what">
@@ -223,7 +219,7 @@
                             </div>
                         </div>
                     </li>
-                    <li>
+                    <li data-track="personal">
                         <span class="when">2020</span>
                         <div class="what">
                             <p>I start B.Tech CSE at BIT Mesra. <span class="quiet">The YouTube channel keeps compounding on the side: 18,000 subscribers by 2021, 22,000 today.</span></p>
@@ -242,7 +238,7 @@
                             </div>
                         </div>
                     </li>
-                    <li>
+                    <li data-track="personal">
                         <span class="when">2016</span>
                         <div class="what">
                             <p>My first YouTube uploads, at 100 subscribers. First domain, first AdSense payout. <span class="quiet">A website could make real money. Noted.</span></p>
@@ -251,7 +247,7 @@
                             </div>
                         </div>
                     </li>
-                    <li>
+                    <li data-track="personal">
                         <span class="when">2011–14</span>
                         <div class="what">
                             <p>Little films, a skateboard, and a remote-controlled airplane I built from scratch at twelve. <span class="quiet">The instinct was already there: make something, show somebody.</span></p>
@@ -357,20 +353,14 @@
 
     <script>
         (() => {
-            // theme
-            const root = document.documentElement;
-            const themeBtn = document.querySelector('[data-theme-toggle]');
-            const themeMeta = document.querySelector('meta[name="theme-color"]');
-            const paintTheme = (t) => {
-                root.dataset.theme = t;
-                if (themeMeta) themeMeta.content = t === 'dark' ? '#151412' : '#faf9f5';
-                if (themeBtn) themeBtn.textContent = t === 'dark' ? 'Light' : 'Dark';
-            };
-            paintTheme(root.dataset.theme === 'dark' ? 'dark' : 'light');
-            if (themeBtn) themeBtn.addEventListener('click', () => {
-                const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
-                try { localStorage.setItem('theme', next); } catch (e) { }
-                paintTheme(next);
+            // the record: public receipts only, or everything
+            const record = document.getElementById('record');
+            const trackBtns = document.querySelectorAll('[data-track-btn]');
+            trackBtns.forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    record.classList.toggle('is-public', btn.dataset.trackBtn === 'public');
+                    trackBtns.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+                });
             });
 
             // lightbox
