@@ -11,7 +11,7 @@
     <meta property="og:image" content="https://priyamraj.com/media/times-square-night.jpg">
     <meta property="og:type" content="book">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="stylesheet" href="visa.css?v=9">
+    <link rel="stylesheet" href="visa.css?v=10">
     <link rel="icon" href="../assets/priyamrajlogo.png" type="image/x-icon">
     <link rel="apple-touch-icon" href="../assets/priyamrajlogo.png">
 
@@ -165,7 +165,7 @@
                     </form>
                     <div class="coach-result" id="coach-result" hidden>
                         <p><a id="coach-link" href="https://visainterviewcoach.com/full-coaching-scheduling?ref=priyam" target="_blank" rel="noreferrer">visainterviewcoach.com → Full coaching session</a></p>
-                        <p>The last field on his form asks <em>"Anything you'd like me to know?"</em> Write <strong class="coach-code">Referred by Priyam Raj</strong> there.</p>
+                        <p>One small favour: the last field on his form asks <em>"Anything you'd like me to know?"</em> Could you write <button type="button" class="coach-code" id="coach-copy" title="Click to copy">Referred by Priyam Raj</button> there? Click it to copy. It's how he knows you came from here, and it helps me keep doing this. Thank you, and good luck at the window.</p>
                     </div>
                     <p class="coach-disclosure">Full disclosure: if you book him through here, I get a referral fee. I paid him full price, before that was true, and I'd send you to him regardless.</p>
                 </section>
@@ -198,6 +198,24 @@
                 const done = () => { form.hidden = true; result.hidden = false; };
                 const body = new URLSearchParams({ email: email.value.trim(), note: 'Referred by Priyam Raj', page: location.pathname });
                 fetch('/api/refer', { method: 'POST', body }).catch(() => {}).finally(done);
+            });
+            // click-to-copy on the referral phrase
+            const copy = document.getElementById('coach-copy');
+            copy.addEventListener('click', async () => {
+                const text = 'Referred by Priyam Raj';
+                try {
+                    await navigator.clipboard.writeText(text);
+                } catch (e) {
+                    // older browsers: select-and-copy fallback
+                    const ta = document.createElement('textarea');
+                    ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+                    document.body.appendChild(ta); ta.select();
+                    try { document.execCommand('copy'); } catch (e2) { /* nothing more we can do */ }
+                    ta.remove();
+                }
+                const was = copy.textContent;
+                copy.textContent = 'Copied!';
+                setTimeout(() => { copy.textContent = was; }, 1500);
             });
         })();
 
