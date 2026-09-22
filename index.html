@@ -65,6 +65,7 @@
         <div class="dropdown" data-dropdown="apple" hidden>
             <button type="button" data-open="about">About This Mac…</button>
             <hr>
+            <a href="/visa">Rejected. Then Approved.</a>
             <a href="/story">The story</a>
         </div>
         <div class="dropdown" data-dropdown="file" hidden>
@@ -121,11 +122,15 @@
             </button>
             <button class="icon" type="button" data-open="ferris" data-kind="movie">
                 <span class="glyph glyph-movie" aria-hidden="true"></span>
-                <span class="label">life-advice.mov</span>
+                <span class="label">ferris.mov</span>
             </button>
             <a class="icon" href="/story" data-kind="link">
                 <span class="glyph glyph-story" aria-hidden="true"></span>
                 <span class="label">story</span>
+            </a>
+            <a class="icon" href="/visa" data-kind="pdf">
+                <span class="glyph glyph-pdf" aria-hidden="true"></span>
+                <span class="label">visa.pdf</span>
             </a>
         </nav>
 
@@ -251,8 +256,8 @@
 
         <section class="window" data-window="ferris" style="--x: 50px; --y: 50px" aria-labelledby="w-ferris-title" tabindex="-1" hidden>
             <header class="window-header">
-                <button class="close" type="button" aria-label="Close life-advice.mov"></button>
-                <h2 class="window-title" id="w-ferris-title">life-advice.mov</h2>
+                <button class="close" type="button" aria-label="Close ferris.mov"></button>
+                <h2 class="window-title" id="w-ferris-title">ferris.mov</h2>
                 <span class="window-meta">0:22</span>
             </header>
             <div class="window-body ferris">
@@ -501,7 +506,7 @@
             show(0);
         })();
 
-        // ---------- life-advice.mov ----------
+        // ---------- ferris.mov ----------
         (() => {
             const player = $('[data-player]');
             const video = $('video', player), btn = $('.play-btn', player);
