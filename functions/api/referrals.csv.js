@@ -1,5 +1,5 @@
 // GET /api/referrals.csv?key=…[&month=YYYY-MM] — the referral list as CSV, for Google Sheets IMPORTDATA.
-// Referrals only, on purpose: the readers list is stored but has no export (see visa/README.md).
+// Referrals only, on purpose: the readers list is stored but has no export (see my-usa-visa-rejection-story/README.md).
 // The key is the REFERRALS_KEY secret on the Pages project. Without it: 404, same as a missing page.
 import { ensureTable } from './_db.js';
 

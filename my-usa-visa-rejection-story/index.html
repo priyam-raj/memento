@@ -5,13 +5,14 @@
     <meta charset="utf-8">
     <title>Rejected. Then Approved. — Priyam Raj</title>
     <meta name="description" content="One founder, two US visa interviews, and the six months in between. For founders, freelancers and anyone whose job doesn't fit the form. Not legal advice. Free to read.">
+    <link rel="canonical" href="https://priyamraj.com/my-usa-visa-rejection-story/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:title" content="Rejected. Then Approved.">
     <meta property="og:description" content="One founder, two US visa interviews, and the six months in between.">
     <meta property="og:image" content="https://priyamraj.com/media/times-square-night.jpg">
     <meta property="og:type" content="book">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="stylesheet" href="visa.css?v=14">
+    <link rel="stylesheet" href="visa.css?v=15">
     <link rel="icon" href="../assets/priyamrajlogo.png" type="image/x-icon">
     <link rel="apple-touch-icon" href="../assets/priyamrajlogo.png">
 
@@ -57,12 +58,14 @@
                             <label class="coach-label" for="read-email-1">Your email</label>
                             <div class="coach-row">
                                 <input type="email" id="read-email-1" name="email" placeholder="you@example.com" required autocomplete="email">
-                                <input type="hidden" name="page" value="/visa/">
+                                <input type="hidden" name="page" value="/my-usa-visa-rejection-story/">
                                 <button type="submit" class="mac-button buy-button">Read the guide</button>
                             </div>
+                            <div class="ts" data-action="read_guide"></div>
+                            <p class="ts-msg" role="alert" hidden></p>
                             <p class="coach-fine">Opens right away. I keep a list of who reads it; no spam, never shared.</p>
                         </form>
-                        <p class="read-again" hidden>Opened in a new tab. <a href="/visa/guide/rejected-then-approved.pdf" target="_blank" rel="noopener">Open the guide again</a></p>
+                        <p class="read-again" hidden>Opened in a new tab. <a href="/my-usa-visa-rejection-story/guide/rejected-then-approved.pdf" target="_blank" rel="noopener">Open the guide again</a></p>
                     </div>
                 </header>
 
@@ -154,12 +157,14 @@
                             <label class="coach-label" for="read-email-2">Your email</label>
                             <div class="coach-row">
                                 <input type="email" id="read-email-2" name="email" placeholder="you@example.com" required autocomplete="email">
-                                <input type="hidden" name="page" value="/visa/">
+                                <input type="hidden" name="page" value="/my-usa-visa-rejection-story/">
                                 <button type="submit" class="mac-button buy-button">Read the guide</button>
                             </div>
+                            <div class="ts" data-action="read_guide"></div>
+                            <p class="ts-msg" role="alert" hidden></p>
                             <p class="coach-fine">Opens right away. I keep a list of who reads it; no spam, never shared.</p>
                         </form>
-                        <p class="read-again" hidden>Opened in a new tab. <a href="/visa/guide/rejected-then-approved.pdf" target="_blank" rel="noopener">Open the guide again</a></p>
+                        <p class="read-again" hidden>Opened in a new tab. <a href="/my-usa-visa-rejection-story/guide/rejected-then-approved.pdf" target="_blank" rel="noopener">Open the guide again</a></p>
                     </section>
 
                 <section class="coach" id="coach">
@@ -171,6 +176,8 @@
                             <input type="email" id="coach-email" name="email" placeholder="you@example.com" required autocomplete="email">
                             <button type="submit" class="mac-button" id="coach-submit">Get the booking link</button>
                         </div>
+                        <div class="ts" data-action="referral"></div>
+                        <p class="ts-msg" role="alert" hidden></p>
                         <p class="coach-fine">Your email goes to me and to him, so he knows you came from here. Nothing else.</p>
                     </form>
                     <div class="coach-result" id="coach-result" hidden>
@@ -212,10 +219,16 @@
                     set(email);
                     const coach = document.getElementById('coach-email');
                     if (coach && !coach.value) coach.value = email;
-                    setTimeout(opened, 50);
+                    setTimeout(() => { opened(); window.tsReset(f); }, 50);
                 });
             });
-            const known = get();
+            // Sent back by the gate (no cookie) or by a failed check: always show the form.
+            const params = new URLSearchParams(location.search);
+            if (params.has('verify')) {
+                const msg = document.querySelector('.read-box .ts-msg');
+                if (msg) { msg.textContent = "Couldn't confirm you're human. Please try once more."; msg.hidden = false; }
+            }
+            const known = params.has('gate') || params.has('verify') ? '' : get();
             if (known) {
                 opened();
                 const coach = document.getElementById('coach-email');
@@ -234,8 +247,26 @@
                 if (!email.checkValidity()) { email.reportValidity(); return; }
                 button.disabled = true; button.textContent = 'One sec…';
                 const done = () => { form.hidden = true; result.hidden = false; };
-                const body = new URLSearchParams({ email: email.value.trim(), note: 'Referred by Priyam Raj', page: location.pathname });
-                fetch('/api/refer', { method: 'POST', body }).catch(() => {}).finally(done);
+                const msg = form.querySelector('.ts-msg');
+                msg.hidden = true;
+                const body = new URLSearchParams({
+                    email: email.value.trim(),
+                    note: 'Referred by Priyam Raj',
+                    page: location.pathname,
+                    'cf-turnstile-response': window.tsToken(form),
+                });
+                fetch('/api/refer', { method: 'POST', body })
+                    .then((r) => {
+                        if (r.status === 403) {
+                            msg.textContent = "Couldn't confirm you're human. Please try once more.";
+                            msg.hidden = false;
+                            button.textContent = 'Get the booking link';
+                            window.tsReset(form);
+                            return;
+                        }
+                        done();
+                    })
+                    .catch(done); // network trouble: don't hold the link hostage
             });
             // click-to-copy on the referral phrase
             const copy = document.getElementById('coach-copy');
@@ -285,6 +316,42 @@
             if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) restart();
         })();
     </script>
+    <script>
+        // Cloudflare Turnstile: one widget per form, invisible unless Cloudflare needs a click.
+        // A form's submit button stays disabled until its widget has a token; tokens are single-use,
+        // so a widget is reset after every submit.
+        (function () {
+            const SITEKEY = '0x4AAAAAAFAaN40Fmem0pfq0';
+            const ids = new Map();
+            const btn = (form) => form.querySelector('button[type=submit]');
+            const setReady = (form, ready) => { const b = btn(form); if (b) b.disabled = !ready; };
+            document.querySelectorAll('.ts').forEach((el) => setReady(el.closest('form'), false));
+            window.tsToken = (form) => {
+                const id = ids.get(form);
+                return id !== undefined && window.turnstile ? window.turnstile.getResponse(id) || '' : '';
+            };
+            window.tsReset = (form) => {
+                const id = ids.get(form);
+                setReady(form, false);
+                if (id !== undefined && window.turnstile) window.turnstile.reset(id);
+            };
+            window.onTurnstileLoad = () => {
+                document.querySelectorAll('.ts').forEach((el) => {
+                    const form = el.closest('form');
+                    ids.set(form, window.turnstile.render(el, {
+                        sitekey: SITEKEY,
+                        action: el.dataset.action,
+                        appearance: 'interaction-only',
+                        theme: 'light',
+                        callback: () => setReady(form, true),
+                        'expired-callback': () => setReady(form, false),
+                        'error-callback': () => setReady(form, false),
+                    }));
+                });
+            };
+        })();
+    </script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad&render=explicit" async defer></script>
 </body>
 
 </html>

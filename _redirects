@@ -1,4 +1,10 @@
-/visa/rejected-then-approved.pdf /visa/#read 301
+/visa/rejected-then-approved.pdf /my-usa-visa-rejection-story/#read 301
+/visa/guide/* /my-usa-visa-rejection-story/guide/:splat 301
+/visa/terms /my-usa-visa-rejection-story/terms/ 301
+/visa/terms/ /my-usa-visa-rejection-story/terms/ 301
+/visa /my-usa-visa-rejection-story/ 301
+/visa/ /my-usa-visa-rejection-story/ 301
+/visa/* /my-usa-visa-rejection-story/:splat 301
 /about / 301
 /about/* / 301
 /instagram https://www.instagram.com/priymrj
