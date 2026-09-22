@@ -196,10 +196,13 @@ a.control.close:hover {
   opacity: 0;
   filter: grayscale(1);
   transition: opacity 0.6s ease, filter 0.4s ease;
+  /* hidden slides must not catch clicks, right-clicks or drags: only the visible one is interactive */
+  pointer-events: none;
 }
 
 .slide.is-active {
   opacity: 1;
+  pointer-events: auto;
 }
 
 .slide-frame:hover .slide.is-active {

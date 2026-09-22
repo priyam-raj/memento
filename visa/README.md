@@ -15,6 +15,8 @@ Google Sheets: in a tab named for the month, put in A1
 
     =IMPORTDATA("https://priyamraj.com/api/referrals.csv?key=<REFERRALS_KEY>&month=2026-09")
 
-Sheets refreshes it on its own. One tab per month, share the sheet view-only with the coach.
+Sheets refreshes it on its own (roughly hourly). Columns: Date (IST) · Email · Country. Add a "Paid"
+checkbox column beside them for the coach; rows never reorder, so the checkboxes stay aligned.
+Share the sheet with him as Editor and protect columns A:C so only you can change the import.
 The key is also in the login keychain: `security find-generic-password -a priyamraj -s visa-referrals-key -w`.
 Rotate it with `npx wrangler pages secret put REFERRALS_KEY --project-name priyamraj`.
