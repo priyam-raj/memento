@@ -1,7 +1,7 @@
-// GET /api/referrals.csv?key=…[&list=readers][&month=YYYY-MM] — a list as CSV, for Google Sheets IMPORTDATA.
-// list defaults to referrals, so the existing sheet formula keeps working.
+// GET /api/referrals.csv?key=…[&month=YYYY-MM] — the referral list as CSV, for Google Sheets IMPORTDATA.
+// Referrals only, on purpose: the readers list is stored but has no export (see visa/README.md).
 // The key is the REFERRALS_KEY secret on the Pages project. Without it: 404, same as a missing page.
-import { ensureTable, LISTS } from './_db.js';
+import { ensureTable } from './_db.js';
 
 export async function onRequestGet({ request, env }) {
   const url = new URL(request.url);
@@ -9,12 +9,12 @@ export async function onRequestGet({ request, env }) {
   if (!env.REFERRALS_KEY || key !== env.REFERRALS_KEY) return new Response('Not found', { status: 404 });
 
   await ensureTable(env);
-  const list = LISTS.includes(url.searchParams.get('list')) ? url.searchParams.get('list') : 'referrals';
+  if (url.searchParams.has('list') && url.searchParams.get('list') !== 'referrals') return new Response('Not found', { status: 404 });
   const month = url.searchParams.get('month') || '';
   const valid = /^\d{4}-\d{2}$/.test(month);
   const stmt = valid
-    ? env.DB.prepare(`SELECT created_at, email, ip_country FROM ${list} WHERE substr(created_at,1,7) = ?1 ORDER BY id`).bind(month)
-    : env.DB.prepare(`SELECT created_at, email, ip_country FROM ${list} ORDER BY id`);
+    ? env.DB.prepare("SELECT created_at, email, ip_country FROM referrals WHERE substr(created_at,1,7) = ?1 ORDER BY id").bind(month)
+    : env.DB.prepare("SELECT created_at, email, ip_country FROM referrals ORDER BY id");
   const { results } = await stmt.all();
 
   // Rows are in insertion order so a row never moves once it appears: anything added beside the

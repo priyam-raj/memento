@@ -15,8 +15,6 @@ export async function ensureTable(env) {
   await env.DB.batch(TABLES.map((t) => env.DB.prepare(schema(t))));
 }
 
-export const LISTS = TABLES;
-
 export function validEmail(raw) {
   const email = String(raw || '').trim().toLowerCase().slice(0, 254);
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? email : '';

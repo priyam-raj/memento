@@ -9,11 +9,12 @@ Two separate lists in the D1 database `visa-referrals` (bound to the Pages proje
   redirects to the box (`_redirects`).
 - **referrals**: the "Want the former officer on your case?" form posts to `functions/api/refer.js`.
 
-`functions/api/referrals.csv.js` serves either as CSV behind the `REFERRALS_KEY` Pages secret:
-`?key=…` for referrals (default), `?key=…&list=readers` for readers.
+`functions/api/referrals.csv.js` serves **referrals only** as CSV behind the `REFERRALS_KEY` Pages
+secret. A Google Sheet reads it with IMPORTDATA, and the coach ticks a Paid column beside it.
 
-A Google Sheet reads both with IMPORTDATA using that key (one tab each), and the coach ticks a Paid
-column beside the referrals.
+The readers list deliberately has no export: it's stored, not viewed, and the coach can see the sheet.
+To read it anyway (owner only, from this machine):
+`npx wrangler d1 execute visa-referrals --remote --command "SELECT created_at, email, ip_country FROM readers ORDER BY id"`
 
 **The key is part of that sheet's formula. Do not rotate or delete it, and do not delete or recreate
 the database, without updating the sheet in the same change** — either breaks the sheet (#N/A) or
