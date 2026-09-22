@@ -11,7 +11,7 @@
     <meta property="og:image" content="https://priyamraj.com/media/times-square-night.jpg">
     <meta property="og:type" content="book">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="stylesheet" href="visa.css?v=13">
+    <link rel="stylesheet" href="visa.css?v=14">
     <link rel="icon" href="../assets/priyamrajlogo.png" type="image/x-icon">
     <link rel="apple-touch-icon" href="../assets/priyamrajlogo.png">
 
@@ -48,12 +48,21 @@
                     <h1 class="title">Rejected.<br>Then Approved.</h1>
                     <p class="subtitle">One founder, two US visa interviews, and the six months in between.</p>
                     <p class="byline">Priyam Raj</p>
-                    <div class="buy buy-top">
+                    <div class="buy buy-top read-box">
                         <div class="buy-info">
                             <p class="price">Free</p>
-                            <p class="format">PDF · 24 pages · no sign-up, no email</p>
+                            <p class="format">PDF · 24 pages</p>
                         </div>
-                        <a class="mac-button buy-button" href="rejected-then-approved.pdf" target="_blank" rel="noopener">Read the guide</a>
+                        <form class="read-form" action="/api/read" method="post" target="_blank">
+                            <label class="coach-label" for="read-email-1">Your email</label>
+                            <div class="coach-row">
+                                <input type="email" id="read-email-1" name="email" placeholder="you@example.com" required autocomplete="email">
+                                <input type="hidden" name="page" value="/visa/">
+                                <button type="submit" class="mac-button buy-button">Read the guide</button>
+                            </div>
+                            <p class="coach-fine">Opens right away. I keep a list of who reads it; no spam, never shared.</p>
+                        </form>
+                        <p class="read-again" hidden>Opened in a new tab. <a href="/visa/guide/rejected-then-approved.pdf" target="_blank" rel="noopener">Open the guide again</a></p>
                     </div>
                 </header>
 
@@ -136,13 +145,22 @@
                     </ol>
                 </section>
 
-                <section class="buy" id="read">
-                    <div class="buy-info">
-                        <p class="price">Free</p>
-                            <p class="format">PDF · 24 pages · no sign-up, no email</p>
-                    </div>
-                    <a class="mac-button buy-button" href="rejected-then-approved.pdf" target="_blank" rel="noopener">Read the guide</a>
-                </section>
+                <section class="buy read-box" id="read">
+                        <div class="buy-info">
+                            <p class="price">Free</p>
+                            <p class="format">PDF · 24 pages</p>
+                        </div>
+                        <form class="read-form" action="/api/read" method="post" target="_blank">
+                            <label class="coach-label" for="read-email-2">Your email</label>
+                            <div class="coach-row">
+                                <input type="email" id="read-email-2" name="email" placeholder="you@example.com" required autocomplete="email">
+                                <input type="hidden" name="page" value="/visa/">
+                                <button type="submit" class="mac-button buy-button">Read the guide</button>
+                            </div>
+                            <p class="coach-fine">Opens right away. I keep a list of who reads it; no spam, never shared.</p>
+                        </form>
+                        <p class="read-again" hidden>Opened in a new tab. <a href="/visa/guide/rejected-then-approved.pdf" target="_blank" rel="noopener">Open the guide again</a></p>
+                    </section>
 
                 <section class="coach" id="coach">
                     <h2>Want the former officer on your case?</h2>
@@ -178,6 +196,33 @@
     </div>
 
     <script>
+        // Read-the-guide boxes: the form posts to /api/read in a new tab (works without JS).
+        // With JS: remember the reader, show a direct link next time, prefill the coach form.
+        (function () {
+            const KEY = 'visa-reader-email';
+            const get = () => { try { return localStorage.getItem(KEY) || ''; } catch (e) { return ''; } };
+            const set = (v) => { try { localStorage.setItem(KEY, v); } catch (e) { /* private mode */ } };
+            const opened = () => document.querySelectorAll('.read-box').forEach((b) => {
+                b.querySelector('.read-form').hidden = true;
+                b.querySelector('.read-again').hidden = false;
+            });
+            document.querySelectorAll('.read-form').forEach((f) => {
+                f.addEventListener('submit', () => {
+                    const email = f.querySelector('input[type=email]').value.trim();
+                    set(email);
+                    const coach = document.getElementById('coach-email');
+                    if (coach && !coach.value) coach.value = email;
+                    setTimeout(opened, 50);
+                });
+            });
+            const known = get();
+            if (known) {
+                opened();
+                const coach = document.getElementById('coach-email');
+                if (coach) coach.value = known;
+            }
+        })();
+
         // Referral form: log the email (functions/api/refer.js), then reveal the booking link.
         (function () {
             const form = document.getElementById('coach-form');

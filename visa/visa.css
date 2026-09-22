@@ -762,3 +762,38 @@ h2 {
   color: #555555;
   margin-bottom: 24px;
 }
+
+/* Read-the-guide email boxes */
+.read-box {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 14px;
+}
+
+.read-box .buy-info {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.read-box .format {
+  margin-top: 0;
+}
+
+.read-form .coach-fine {
+  margin-top: 8px;
+}
+
+.read-again {
+  font-size: 15px;
+}
+
+.read-again a {
+  color: #000000;
+  font-weight: 600;
+}
+
+.read-again a:hover {
+  background: #000000;
+  color: #ffffff;
+}
