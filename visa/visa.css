@@ -606,6 +606,132 @@ h2 {
   text-align: right;
 }
 
+/* Former-officer referral */
+.coach {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 2px dotted #000000;
+  font-size: 15px;
+}
+
+.coach > p {
+  margin-bottom: 14px;
+}
+
+.coach-form {
+  padding: 16px;
+  background: #f0f0f0;
+  border: 1px solid #000000;
+}
+
+.coach-label {
+  display: block;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.coach-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.coach-row input {
+  flex: 1 1 220px;
+  min-width: 0;
+  padding: 10px 12px;
+  font: inherit;
+  font-size: 15px;
+  border: 2px solid #000000;
+  background: #ffffff;
+  box-shadow: inset 1px 1px 0 #808080;
+}
+
+.coach-row input:focus-visible {
+  outline: 2px solid #000000;
+  outline-offset: 2px;
+}
+
+.coach-row .mac-button {
+  font-size: 13px;
+  padding: 10px 16px;
+}
+
+.coach-row .mac-button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.coach-fine,
+.coach-disclosure {
+  font-size: 13px;
+  color: #555555;
+  margin-top: 10px;
+}
+
+.coach-result {
+  padding: 16px;
+  border: 2px solid #000000;
+  box-shadow: 4px 4px 0 #000000;
+}
+
+.coach-result p + p {
+  margin-top: 8px;
+}
+
+.coach-result a {
+  color: #000000;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.coach-result a:hover {
+  background: #000000;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.coach-code {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border: 1px solid #000000;
+  background: #ffffff;
+  color: #000000;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 #000000;
+}
+
+.coach-code:hover {
+  background: #000000;
+  color: #ffffff;
+}
+
+.coach-code:active {
+  box-shadow: none;
+  transform: translate(1px, 1px);
+}
+
+.coach-disclosure {
+  margin-top: 14px;
+}
+
+.officer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.officer a:hover {
+  background: #000000;
+  color: #ffffff;
+  text-decoration: none;
+}
+
 /* Terms page */
 .legal h2 {
   margin-top: 28px;
