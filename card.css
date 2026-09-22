@@ -1,0 +1,285 @@
+/* ============================================================
+   priyamraj.com — the card
+   One screen. A business card on black. Dark on purpose; this
+   page has one look and paints every colour itself.
+   ============================================================ */
+
+:root {
+  --ground: #0b0b0c;
+  --card: #121214;
+  --edge: #2b2b2f;
+  --bone: #e9e4d8;
+  --bone-dim: #9a958a;
+  --bone-faint: #5f5b53;
+  --serif: "Cormorant Garamond", "Iowan Old Style", "Times New Roman", Georgia, serif;
+  --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--ground);
+  color: var(--bone);
+  font-family: var(--serif);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.25s ease, color 0.25s ease;
+}
+
+a:hover,
+a:focus-visible {
+  border-bottom-color: var(--bone-dim);
+  outline: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+}
+
+/* ---------- stage ---------- */
+
+.stage {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  /* a faint spotlight so the card sits on something, not in a void */
+  background: radial-gradient(ellipse 70% 55% at 50% 48%, #151517 0%, var(--ground) 70%);
+}
+
+/* ---------- card ---------- */
+
+.card {
+  position: relative;
+  width: min(560px, 100%);
+  aspect-ratio: 7 / 4;
+  perspective: 1600px;
+}
+
+.face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 32px 40px;
+  background: var(--card);
+  border: 1px solid var(--edge);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.6),
+    0 30px 80px -30px rgba(0, 0, 0, 0.9),
+    inset 0 0 0 1px rgba(233, 228, 216, 0.03);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.front {
+  cursor: pointer;
+  transform: rotateY(0deg);
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+
+.card.is-flipped .front {
+  transform: rotateY(-180deg);
+}
+
+.card.is-flipped .back {
+  transform: rotateY(0deg);
+}
+
+/* the inner hairline frame an engraved card has */
+.face::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border: 1px solid var(--edge);
+  pointer-events: none;
+}
+
+/* ---------- front ---------- */
+
+.rule {
+  display: block;
+  width: 36px;
+  height: 1px;
+  background: var(--bone-faint);
+}
+
+.name {
+  margin: 22px 0 10px;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(34px, 6.2vw, 48px);
+  line-height: 1;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding-left: 0.16em; /* optical: balance the trailing tracking */
+}
+
+.line {
+  margin: 0 0 6px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(17px, 2.6vw, 20px);
+  color: var(--bone-dim);
+  letter-spacing: 0.02em;
+}
+
+.place {
+  margin: 0 0 22px;
+  font-family: var(--sans);
+  font-size: 10.5px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--bone-faint);
+  padding-left: 0.32em;
+}
+
+.hint {
+  position: absolute;
+  right: 22px;
+  bottom: 18px;
+  font-family: var(--sans);
+  font-size: 9.5px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--bone-faint);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.front:hover .hint,
+.front:focus-visible .hint {
+  opacity: 1;
+}
+
+.front:focus-visible {
+  outline: none;
+}
+
+.front:focus-visible::before {
+  border-color: var(--bone-dim);
+}
+
+/* ---------- back ---------- */
+
+.back p {
+  margin: 0;
+}
+
+.studio {
+  font-family: var(--sans);
+  font-size: 10.5px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+  padding-left: 0.32em;
+  margin-bottom: 14px !important;
+}
+
+.works {
+  font-size: clamp(17px, 2.6vw, 21px);
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+  margin-bottom: 18px !important;
+}
+
+.figures {
+  font-family: var(--sans);
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+  margin-bottom: 26px !important;
+  padding-left: 0.22em;
+}
+
+.contact {
+  font-size: clamp(16px, 2.4vw, 19px);
+  font-style: italic;
+  margin-bottom: 8px !important;
+}
+
+.links {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+}
+
+.links a:hover,
+.links a:focus-visible {
+  color: var(--bone);
+}
+
+.turn-back {
+  position: absolute;
+  left: 22px;
+  bottom: 16px;
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--bone-faint);
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+.turn-back:hover,
+.turn-back:focus-visible {
+  color: var(--bone);
+  outline: none;
+}
+
+/* ---------- phone ---------- */
+
+@media (max-width: 520px) {
+  .card {
+    aspect-ratio: auto;
+    min-height: 320px;
+  }
+
+  .face {
+    position: absolute;
+    padding: 34px 26px;
+  }
+
+  .works {
+    line-height: 1.6;
+  }
+
+  .hint {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .face {
+    transition: none;
+  }
+}
