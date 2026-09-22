@@ -89,7 +89,7 @@
 
                 <section class="officer">
                     <p class="officer-label">Reviewed by a former US visa officer</p>
-                    <p>After the refusal I paid a former visa officer to go through my case, specifically: what the refusal meant for a founder like me, what to change, how to answer, and how to fill the DS-160. His guidance, and why it worked, is in here. <a href="#coach">Want him on your case?</a></p>
+                    <p>After the refusal I paid a former visa officer to go through my case, specifically: what the refusal meant for a founder like me, what to change, how to answer, and how to fill the DS-160. His guidance, and why it worked, is in here.</p>
                 </section>
 
                 <section class="who">
@@ -152,24 +152,6 @@
                     <a class="mac-button buy-button" href="https://dodo.pe/visa">Get the PDF</a>
                 </section>
 
-                <section class="coach" id="coach">
-                    <h2>Want the former officer on your case?</h2>
-                    <p>Nine years in the US Foreign Service as a visa interviewer and consular section manager. He's the one who worked through my case with me, step by step, and it's why the second interview went the way it did. He does private coaching sessions now: 50 minutes, $595.</p>
-                    <form class="coach-form" id="coach-form" novalidate>
-                        <label for="coach-email" class="coach-label">Your email</label>
-                        <div class="coach-row">
-                            <input type="email" id="coach-email" name="email" placeholder="you@example.com" required autocomplete="email">
-                            <button type="submit" class="mac-button" id="coach-submit">Get the booking link</button>
-                        </div>
-                        <p class="coach-fine">Your email goes to me and to him, so he knows you came from here. Nothing else.</p>
-                    </form>
-                    <div class="coach-result" id="coach-result" hidden>
-                        <p><a id="coach-link" href="https://visainterviewcoach.com/full-coaching-scheduling?ref=priyam" target="_blank" rel="noreferrer">visainterviewcoach.com → Full coaching session</a></p>
-                        <p>One small favour: the last field on his form asks <em>"Anything you'd like me to know?"</em> Could you write <button type="button" class="coach-code" id="coach-copy" title="Click to copy">Referred by Priyam Raj</button> there? Click it to copy. It's how he knows you came from here, and it helps me keep doing this. Thank you, and good luck at the window.</p>
-                    </div>
-                    <p class="coach-disclosure">Full disclosure: if you book him through here, I get a referral fee. I paid him full price, before that was true, and I'd send you to him regardless.</p>
-                </section>
-
                 <section class="honest">
                     <h2>What this isn't</h2>
                     <p>Not legal advice, and not a guarantee. I'm not a lawyer or a consultant; this is one founder's account of two attempts. The decision is always the officer's.</p>
@@ -185,40 +167,6 @@
     </div>
 
     <script>
-        // Referral form: log the email (functions/api/refer.js), then reveal the booking link.
-        (function () {
-            const form = document.getElementById('coach-form');
-            const email = document.getElementById('coach-email');
-            const result = document.getElementById('coach-result');
-            const button = document.getElementById('coach-submit');
-            form.addEventListener('submit', function (ev) {
-                ev.preventDefault();
-                if (!email.checkValidity()) { email.reportValidity(); return; }
-                button.disabled = true; button.textContent = 'One sec…';
-                const done = () => { form.hidden = true; result.hidden = false; };
-                const body = new URLSearchParams({ email: email.value.trim(), note: 'Referred by Priyam Raj', page: location.pathname });
-                fetch('/api/refer', { method: 'POST', body }).catch(() => {}).finally(done);
-            });
-            // click-to-copy on the referral phrase
-            const copy = document.getElementById('coach-copy');
-            copy.addEventListener('click', async () => {
-                const text = 'Referred by Priyam Raj';
-                try {
-                    await navigator.clipboard.writeText(text);
-                } catch (e) {
-                    // older browsers: select-and-copy fallback
-                    const ta = document.createElement('textarea');
-                    ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
-                    document.body.appendChild(ta); ta.select();
-                    try { document.execCommand('copy'); } catch (e2) { /* nothing more we can do */ }
-                    ta.remove();
-                }
-                const was = copy.textContent;
-                copy.textContent = 'Copied!';
-                setTimeout(() => { copy.textContent = was; }, 1500);
-            });
-        })();
-
         // Photo slideshow: auto-advances, pauses on hover, arrows and dots
         (function () {
             const root = document.getElementById('slides');
